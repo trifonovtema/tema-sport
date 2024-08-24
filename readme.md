@@ -9,3 +9,11 @@ This project is designed to manage and track competitions, participants, judging
     ```
     docker-compose up --build
     ```
+
+
+lsof -t -i:8000 | xargs kill -9
+
+
+```shell
+ python -c 'import secrets; print(secrets.token_hex())'
+```
