@@ -74,7 +74,7 @@ class DatabaseConfig(BaseSettings):
     PORT: str
     SCHEMA: str
 
-    echo: bool = False
+    echo: bool = True
     echo_pool: bool = False
     pool_size: int = 50
     max_overflow: int = 10

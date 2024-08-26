@@ -1,11 +1,11 @@
 import asyncio
 
 from fastapi import FastAPI
-from backend.base_api.v1.router import router
+from .api.router import router as router_api
 
 # from backend.base_api.v1.router_websocket import router as router_websocket
 from contextlib import asynccontextmanager
-from backend.base_api.v1.kafka_consumers import kafka_consumer_manager
+from backend.base_api.api.v1.kafka_consumers import kafka_consumer_manager
 from backend.core.models import db_helper
 
 
@@ -28,4 +28,4 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(router)
+app.include_router(router_api)

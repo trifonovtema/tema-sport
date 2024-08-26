@@ -4,7 +4,7 @@ from abc import ABC
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer
 import json
 
-from backend.base_api.v1.websocket_manager import WebSocketManager
+from backend.base_api.api.v1.websocket_manager import WebSocketManager
 from backend.core.schemas.kafka import KafkaMessage
 from backend.settings import get_settings
 from fastapi import WebSocket, WebSocketDisconnect

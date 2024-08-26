@@ -1,7 +1,5 @@
-from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-# import contextlib
 
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
@@ -22,6 +20,8 @@ class DatabaseHelper:
         pool_size: int = 5,
         max_overflow: int = 10,
     ) -> None:
+        print(f"{url=}")
+        print(f"{settings.db.PASSWORD=}")
         self.engine: AsyncEngine = create_async_engine(
             url=url,
             echo=echo,
@@ -39,7 +39,6 @@ class DatabaseHelper:
     async def dispose(self) -> None:
         await self.engine.dispose()
 
-    @asynccontextmanager
     async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
         async with self.session_factory() as session:
             yield session
@@ -62,7 +61,7 @@ class DatabaseHelper:
 settings = get_settings()
 
 db_helper = DatabaseHelper(
-    url=str(settings.db.get_db_url()),
+    url=settings.db.get_db_url(),
     echo=settings.db.echo,
     echo_pool=settings.db.echo_pool,
     pool_size=settings.db.pool_size,
