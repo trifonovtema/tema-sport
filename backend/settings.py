@@ -1,13 +1,24 @@
 import logging
 from functools import lru_cache
 from dotenv import load_dotenv, find_dotenv
-from pydantic import PostgresDsn, RedisDsn
+from pydantic import PostgresDsn, RedisDsn, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 
 logger = logging.getLogger(__name__)
 
 load_dotenv(find_dotenv())
+
+
+class BaseApiV1Prefix(BaseModel):
+    prefix: str = "/v1"
+    users: str = "/users"
+    auth: str = "/auth"
+
+
+class BaseApiPrefix(BaseModel):
+    prefix: str = "/api"
+    v1: BaseApiV1Prefix = BaseApiV1Prefix()
 
 
 class KafkaConfig(BaseSettings):
@@ -102,6 +113,7 @@ class Settings(BaseSettings):
     kafka: KafkaConfig = KafkaConfig()
     redis: RedisConfig = RedisConfig()
     access_token: AccessToken = AccessToken()
+    base_api: BaseApiPrefix = BaseApiPrefix()
 
     # model_config = SettingsConfigDict(env_file=DOTENV,
     #                                   env_file_encoding="utf-8",
