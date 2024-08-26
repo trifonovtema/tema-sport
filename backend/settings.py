@@ -20,6 +20,13 @@ class BaseApiPrefix(BaseModel):
     prefix: str = "/api"
     v1: BaseApiV1Prefix = BaseApiV1Prefix()
 
+    @property
+    def bearer_token_url(self) -> str:
+        # /v1/auth/jwt/login
+        parts = (self.prefix, self.v1.prefix, self.v1.auth, "/jwt/login")
+        path = "".join(parts)
+        return path.removeprefix("/")
+
 
 class KafkaConfig(BaseSettings):
     model_config = SettingsConfigDict(
