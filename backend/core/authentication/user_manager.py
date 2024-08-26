@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 
@@ -22,11 +20,11 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
     reset_password_token_secret = settings.access_token.reset_password_token_secret
     verification_token_secret = settings.access_token.verification_token_secret
 
-    async def on_after_register(self, user: User, request: Request | None = None):
+    async def on_after_register(self, user: User, request: "Request | None" = None):
         logger.warning("User %r has registered.", user.id)
 
     async def on_after_forgot_password(
-        self, user: User, token: str, request: Request | None = None
+        self, user: User, token: str, request: "Request | None" = None
     ):
         logger.warning(
             "User %r has forgot their password. Reset token: %r",
@@ -35,7 +33,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         )
 
     async def on_after_request_verify(
-        self, user: User, token: str, request: Request | None = None
+        self, user: User, token: str, request: "Request | None" = None
     ):
         logger.warning(
             "Verification requested for user %r. Verification token: %r",

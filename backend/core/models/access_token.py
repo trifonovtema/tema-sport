@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 from fastapi_users_db_sqlalchemy.access_token import (
@@ -24,5 +22,5 @@ class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[UserIdType]):  # !
     )
 
     @classmethod
-    def get_db(cls, session: AsyncSession):
+    def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyAccessTokenDatabase(session, cls)

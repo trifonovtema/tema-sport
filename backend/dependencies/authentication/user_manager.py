@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Annotated, TYPE_CHECKING
 
 from fastapi import Depends
@@ -12,9 +10,6 @@ if TYPE_CHECKING:
 
 
 async def get_user_manager(
-    users_db: Annotated[
-        SQLAlchemyUserDatabase,
-        Depends(get_users_db),
-    ]
+    users_db: Annotated["SQLAlchemyUserDatabase", Depends(get_users_db)]
 ):
     yield UserManager(users_db)

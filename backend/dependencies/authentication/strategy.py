@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import TYPE_CHECKING, Annotated
 from fastapi import Depends
 from fastapi_users.authentication.strategy.db import DatabaseStrategy
@@ -15,7 +14,7 @@ settings = get_settings()
 
 def get_database_strategy(
     access_tokens_db: Annotated[
-        AccessTokenDatabase[AccessToken], Depends(get_access_tokens_db)
+        "AccessTokenDatabase[AccessToken]", Depends(get_access_tokens_db)
     ],
 ) -> DatabaseStrategy:
     return DatabaseStrategy(

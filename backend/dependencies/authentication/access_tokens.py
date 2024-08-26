@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import TYPE_CHECKING, Annotated
 
 from fastapi import Depends
@@ -10,6 +9,6 @@ if TYPE_CHECKING:
 
 
 async def get_access_tokens_db(
-    session: Annotated[AsyncSession, Depends(db_helper.session_getter())]
+    session: Annotated["AsyncSession", Depends(db_helper.session_getter)]
 ):
     yield AccessToken.get_db(session=session)

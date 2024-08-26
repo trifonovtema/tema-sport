@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
@@ -16,5 +14,5 @@ if TYPE_CHECKING:
 class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
 
     @classmethod
-    def get_db(cls, session: AsyncSession):
+    def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, cls)
