@@ -11,8 +11,3 @@ router.include_router(router_user)
 router.include_router(router_competition)
 router.include_router(router_websocket)
 router.include_router(router_auth)
-
-
-@router.get("/health", summary="Check Health", description="Check health desc")
-async def get_health():
-    return {"health": "ok"}
