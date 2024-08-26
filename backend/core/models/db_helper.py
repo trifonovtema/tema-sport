@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 # import contextlib
@@ -38,6 +39,7 @@ class DatabaseHelper:
     async def dispose(self) -> None:
         await self.engine.dispose()
 
+    @asynccontextmanager
     async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
         async with self.session_factory() as session:
             yield session
@@ -58,6 +60,7 @@ class DatabaseHelper:
 
 
 settings = get_settings()
+
 db_helper = DatabaseHelper(
     url=str(settings.db.get_db_url()),
     echo=settings.db.echo,
