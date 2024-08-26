@@ -32,3 +32,8 @@ router.include_router(
 router.include_router(
     fastapi_users.get_verify_router(UserRead),
 )
+
+# /forgot-password (the user asks for a token to reset its password) and /reset-password
+router.include_router(
+    fastapi_users.get_reset_password_router(),
+)
