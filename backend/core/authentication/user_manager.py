@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, Optional
 
-from fastapi_users import BaseUserManager, IntegerIDMixin  # UUIDIDMixin
+from fastapi_users import BaseUserManager
 
 from backend.core.models import User
 from ...settings import get_settings
@@ -13,7 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class UserManager(
-    IntegerIDMixin, BaseUserManager[User, get_settings().db.id_type.id_type]
+    get_settings().db.id_type.id_mixin,
+    BaseUserManager[User, get_settings().db.id_type.id_type],
 ):
     reset_password_token_secret = (
         get_settings().access_token.reset_password_token_secret
