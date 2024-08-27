@@ -18,8 +18,7 @@ if TYPE_CHECKING:
 
 class AccessToken(
     Base, SQLAlchemyBaseAccessTokenTable[get_settings().db.id_type.id_type]
-):  # !
-
+):
     user_id: Mapped[get_settings().db.id_type.id_type] = mapped_column(
         get_settings().db.id_type.id_type_sqlalchemy,
         ForeignKey(User.id, ondelete="cascade"),
