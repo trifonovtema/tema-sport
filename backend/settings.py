@@ -4,8 +4,9 @@ from dotenv import load_dotenv, find_dotenv
 from pydantic import PostgresDsn, RedisDsn, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
-
-from backend.core.types.id import IdType, IdTypeUuid
+from devtools import debug
+from uuid import UUID
+from backend.core.types.id import IdType, IdTypeUuid  # IdTypeInt
 
 logger = logging.getLogger(__name__)
 
@@ -134,5 +135,8 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings():
     res = Settings()
-    print(f"{res.redis.get_redis_url()=}")
+    # debug(res)
+    debug(UUID)
+    debug(res.db.id_type.id_type)
+
     return Settings()
