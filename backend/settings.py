@@ -5,6 +5,8 @@ from pydantic import PostgresDsn, RedisDsn, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 
+from backend.core.types.id import IdType, IdTypeUuid
+
 logger = logging.getLogger(__name__)
 
 load_dotenv(find_dotenv())
@@ -78,6 +80,8 @@ class DatabaseConfig(BaseSettings):
     echo_pool: bool = False
     pool_size: int = 50
     max_overflow: int = 10
+
+    id_type: IdType = IdTypeUuid()
 
     def get_db_url(self) -> PostgresDsn:
         return URL.create(
