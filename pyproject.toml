@@ -8,7 +8,7 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 fastapi = "^0.112.2"
 uvicorn = "^0.30.6"
 aiokafka = "^0.11.0"
@@ -18,12 +18,14 @@ python-dotenv = "^1.0.1"
 redis = "^5.0.8"
 asyncpg = "^0.29.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+alembic = "^1.13.2"
+fastapi-users-db-sqlalchemy = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
 pre-commit = "^3.8.0"
 black = "^24.8.0"
-poetry = "^1.8.3"
+devtools = "^0.12.2"
 
 [build-system]
 requires = ["poetry-core"]
