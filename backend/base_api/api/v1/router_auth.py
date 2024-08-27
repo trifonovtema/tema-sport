@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-
+from devtools import debug
 from backend.core.models import User
 from backend.core.schemas.user import UserRead, UserCreate
 from backend.dependencies.authentication.backend import authentication_backend
@@ -53,6 +53,7 @@ async def custom_user(
         Depends(current_user),
     ],
 ):
+    debug(user)
     return {"user": user}
 
 
@@ -63,4 +64,5 @@ async def custom_super_user(
         Depends(current_super_user),
     ],
 ):
+    debug(user)
     return {"user": user}
