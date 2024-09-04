@@ -84,7 +84,7 @@ class DatabaseConfig(BaseSettings):
 
     id_type: IdType = IdTypeUuid()
 
-    def get_db_url(self) -> PostgresDsn:
+    def get_db_url(self) -> URL:
         return URL.create(
             drivername="postgresql+asyncpg",
             username=self.USER,
@@ -138,5 +138,6 @@ def get_settings():
     # debug(res)
     debug(UUID)
     debug(res.db.id_type.id_type)
-
+    debug(res.db.get_db_url())
+    debug(res.db.PASSWORD)
     return Settings()
