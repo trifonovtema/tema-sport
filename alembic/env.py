@@ -1,33 +1,18 @@
 import asyncio
-
-from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
-
-
 from logging.config import fileConfig
 
 from sqlalchemy import pool
+from sqlalchemy.engine import Connection
+from sqlalchemy.ext.asyncio import async_engine_from_config
+from sqlalchemy.schema import CreateSchema
 
 from alembic import context
 
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from backend.settings import get_settings
-from backend.core.models import Base
-
-# from config import Settings
-from sqlalchemy.schema import CreateSchema
-
-settings = get_settings()
 config = context.config
 ALEMBIC_VERSION_SCHEMA = "alembic"
-section = config.config_ini_section
-config.set_section_option(section, "POSTGRES_PASSWORD", settings.db.PASSWORD)
-config.set_section_option(section, "POSTGRES_USER", settings.db.USER)
-config.set_section_option(section, "POSTGRES_DB", settings.db.NAME)
-config.set_section_option(section, "POSTGRES_HOST", settings.db.HOST)
-config.set_section_option(section, "POSTGRES_PORT", settings.db.PORT)
-config.set_main_option("sqlalchemy.url", settings.db.get_db_url2())
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -38,13 +23,19 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [Base.metadata]
+from backend.core.models import Base
+from backend.settings import get_settings
 
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+config.set_main_option(
+    "sqlalchemy.url",
+    get_settings().db.get_db_url().render_as_string(hide_password=False),
+)
 
 
 def run_migrations_offline() -> None:
@@ -65,7 +56,6 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
-        version_table_schema=ALEMBIC_VERSION_SCHEMA,
     )
 
     with context.begin_transaction():
@@ -80,7 +70,10 @@ def do_run_migrations(connection: Connection) -> None:
     )
 
     connection.execute(CreateSchema(ALEMBIC_VERSION_SCHEMA, if_not_exists=True))
+    with context.begin_transaction():
+        context.run_migrations()
 
+    connection.execute(CreateSchema(ALEMBIC_VERSION_SCHEMA, if_not_exists=True))
     with context.begin_transaction():
         context.run_migrations()
 
@@ -96,7 +89,6 @@ async def run_async_migrations() -> None:
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
-
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)
 
