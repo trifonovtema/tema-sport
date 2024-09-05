@@ -2,10 +2,8 @@ from sqlalchemy import MetaData
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import declared_attr
 
-from backend.settings import get_settings
+from backend.core.config import settings
 from backend.utils.snake_converter import camel_case_to_snake_case
-
-settings = get_settings()
 
 
 class Base(DeclarativeBase):

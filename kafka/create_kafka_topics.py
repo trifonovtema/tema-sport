@@ -1,5 +1,5 @@
 from backend.constants import KafkaTopic
-from backend.settings import get_settings
+from core.config import get_settings
 
 BOOTSTRAP_SERVER = "kafka:9092"
 

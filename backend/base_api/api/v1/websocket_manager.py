@@ -1,7 +1,7 @@
 import json
 
 from backend.core.schemas.kafka import KafkaMessage
-from backend.settings import get_settings
+from backend.core.config import settings
 from fastapi import WebSocket, WebSocketDisconnect
 from redis.asyncio import Redis
 
@@ -9,7 +9,7 @@ from redis.asyncio import Redis
 class WebSocketManager:
     def __init__(self):
         self.websocket_clients = {}
-        self.settings = get_settings()
+        self.settings = settings
         self.redis = Redis(host=self.settings.redis.HOST, port=self.settings.redis.PORT)
 
     async def register_websocket(self, websocket: WebSocket, client_id: str):

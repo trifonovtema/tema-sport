@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 from devtools import debug
 from uuid import UUID
-from backend.core.types.id import IdType, IdTypeUuid  # IdTypeInt
+from backend.core.types.id import IdType, IdTypeUuid, IdTypeInt
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,18 @@ class DatabaseConfig(BaseSettings):
     pool_size: int = 50
     max_overflow: int = 10
 
-    id_type: IdType = IdTypeUuid()
+    # id_type: IdType = IdTypeUuid()
+    id_type: str = "uuid"  # можно менять на "int" для int ID
+
+    @property
+    def id_type_class(self) -> IdType:
+        """Фабричный метод для получения класса типа ID."""
+        if self.id_type == "uuid":
+            return IdTypeUuid()
+        elif self.id_type == "int":
+            return IdTypeInt()
+        else:
+            raise ValueError(f"Unsupported id_type: {self.id_type}")
 
     def get_db_url(self) -> URL:
         return URL.create(
@@ -133,11 +144,10 @@ class Settings(BaseSettings):
 
 
 @lru_cache
-def get_settings():
+def get_settings1() -> Settings:
     res = Settings()
-    # debug(res)
-    debug(UUID)
-    debug(res.db.id_type.id_type)
-    debug(res.db.get_db_url())
-    debug(res.db.PASSWORD)
+    debug(res)
     return Settings()
+
+
+settings = get_settings1()

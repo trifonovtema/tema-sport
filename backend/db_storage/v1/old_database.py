@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import declarative_base, DeclarativeMeta
 
-from backend.settings import get_settings
+from core.config import get_settings
 
 logger = logging.getLogger(__name__)
 Base: DeclarativeMeta = declarative_base()

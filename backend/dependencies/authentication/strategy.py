@@ -3,13 +3,11 @@ from fastapi import Depends
 from fastapi_users.authentication.strategy.db import DatabaseStrategy
 
 from .access_tokens import get_access_tokens_db
-from backend.settings import get_settings
+from backend.core.config import settings
 
 if TYPE_CHECKING:
     from backend.core.models import AccessToken
     from fastapi_users.authentication.strategy.db import AccessTokenDatabase
-
-settings = get_settings()
 
 
 def get_database_strategy(

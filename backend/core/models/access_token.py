@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
 from .user import User
-from ...settings import get_settings
+from backend.core.config import settings
 
 
 if TYPE_CHECKING:
@@ -17,10 +17,11 @@ if TYPE_CHECKING:
 
 
 class AccessToken(
-    Base, SQLAlchemyBaseAccessTokenTable[get_settings().db.id_type.id_type]
+    Base,
+    SQLAlchemyBaseAccessTokenTable[settings.db.id_type_class.get_id_type()],
 ):
-    user_id: Mapped[get_settings().db.id_type.id_type] = mapped_column(
-        get_settings().db.id_type.id_type_sqlalchemy,
+    user_id: Mapped[settings.db.id_type_class.get_id_type()] = mapped_column(
+        settings.db.id_type_class.get_sqlalchemy_type(),
         ForeignKey(User.id, ondelete="cascade"),
         nullable=False,  # GUID,
     )

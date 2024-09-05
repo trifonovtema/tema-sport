@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Optional
 from fastapi_users import BaseUserManager
 
 from backend.core.models import User
-from backend.core.config import settings
+from core.config import settings
 import logging
 
 if TYPE_CHECKING:
@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class UserManager(
-    settings.db.id_type_class.get_id_mixin(),
-    BaseUserManager[User, settings.db.id_type_class.get_id_type()],
+    settings.db.id_type.id_mixin,
+    BaseUserManager[User, settings.db.id_type.id_type],
 ):
     reset_password_token_secret = settings.access_token.reset_password_token_secret
     verification_token_secret = settings.access_token.verification_token_secret

@@ -5,14 +5,13 @@ from devtools import debug
 from backend.core.models import User
 from backend.core.schemas.user import UserRead, UserCreate
 from backend.dependencies.authentication.backend import authentication_backend
-from backend.base_api.api.v1.fastapi_users_router import (
+from backend.base_api.api.v1.users.fastapi_users_router import (
     fastapi_users,
     current_user,
     current_super_user,
 )
-from backend.settings import get_settings
+from backend.core.config import settings
 
-settings = get_settings()
 router = APIRouter(
     prefix=settings.base_api.v1.auth,
     tags=["Auth"],

@@ -6,7 +6,7 @@ import json
 
 from backend.base_api.api.v1.websocket_manager import WebSocketManager
 from backend.core.schemas.kafka import KafkaMessage
-from backend.settings import get_settings
+from backend.core.config import settings
 from fastapi import WebSocket, WebSocketDisconnect
 from backend.constants import KafkaTopic
 
@@ -14,7 +14,7 @@ from backend.constants import KafkaTopic
 class KafkaProducerService:
     def __init__(self):
         self.producer = None
-        self.settings = get_settings()
+        self.settings = settings
         self.bootstrap_servers = self.settings.kafka.bootstrap_servers
 
     async def start(self):
@@ -51,7 +51,7 @@ class KafkaConsumer:
         consumer_service: ConsumerServiceBase | None = None,
     ):
         self.topic = topic.value
-        self.settings = get_settings()
+        self.settings = settings
         self.bootstrap_servers = self.settings.kafka.bootstrap_servers
         self.group_id = group_id
         self.consumer = AIOKafkaConsumer(

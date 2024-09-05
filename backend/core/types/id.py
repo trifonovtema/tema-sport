@@ -1,22 +1,46 @@
 import uuid
-from abc import ABC
+from abc import ABC, abstractmethod
 from fastapi_users import UUIDIDMixin, IntegerIDMixin
 from sqlalchemy import Integer as SqlalchemyInteger, UUID as SQLALCHEMY_UUID
 
 
 class IdType(ABC):
-    id_type = None  # int
-    id_type_sqlalchemy = None  # Integer
-    id_mixin = None
+    """Абстрактный класс для типов ID."""
+
+    @abstractmethod
+    def get_id_type(self):
+        pass
+
+    @abstractmethod
+    def get_sqlalchemy_type(self):
+        pass
+
+    @abstractmethod
+    def get_id_mixin(self):
+        pass
 
 
 class IdTypeInt(IdType):
-    id_type = int
-    id_type_sqlalchemy = SqlalchemyInteger
-    id_mixin = IntegerIDMixin
+    """Класс для работы с int ID."""
+
+    def get_id_type(self):
+        return int
+
+    def get_sqlalchemy_type(self):
+        return SqlalchemyInteger
+
+    def get_id_mixin(self):
+        return IntegerIDMixin
 
 
 class IdTypeUuid(IdType):
-    id_type = uuid.UUID
-    id_type_sqlalchemy = SQLALCHEMY_UUID
-    id_mixin = UUIDIDMixin
+    """Класс для работы с UUID ID."""
+
+    def get_id_type(self):
+        return uuid.UUID
+
+    def get_sqlalchemy_type(self):
+        return SQLALCHEMY_UUID
+
+    def get_id_mixin(self):
+        return UUIDIDMixin

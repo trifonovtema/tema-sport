@@ -24,7 +24,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from backend.core.models import Base
-from backend.settings import get_settings
+from core.config import get_settings
 
 target_metadata = Base.metadata
 

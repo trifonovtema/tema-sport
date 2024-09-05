@@ -1,9 +1,9 @@
 from fastapi_users import schemas
 
-from backend.settings import get_settings
+from backend.core.config import settings
 
 
-class UserRead(schemas.BaseUser[get_settings().db.id_type.id_type]):
+class UserRead(schemas.BaseUser[settings.db.id_type_class.get_id_type()]):
     pass
 
 

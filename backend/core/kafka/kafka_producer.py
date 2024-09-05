@@ -2,7 +2,7 @@ from aiokafka import AIOKafkaProducer
 import json
 
 from backend.core.schemas.kafka import KafkaMessage
-from backend.settings import get_settings
+from core.config import get_settings
 from backend.constants import KafkaTopic
 
 
