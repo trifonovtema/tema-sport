@@ -13,6 +13,11 @@ logger = logging.getLogger(__name__)
 load_dotenv(find_dotenv())
 
 
+class RunConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
+
+
 class BaseApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     users: str = "/users"
@@ -137,6 +142,7 @@ class Settings(BaseSettings):
     redis: RedisConfig = RedisConfig()
     access_token: AccessToken = AccessToken()
     base_api: BaseApiPrefix = BaseApiPrefix()
+    run: RunConfig = RunConfig()
 
     # model_config = SettingsConfigDict(env_file=DOTENV,
     #                                   env_file_encoding="utf-8",
