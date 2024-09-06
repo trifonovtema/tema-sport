@@ -23,9 +23,9 @@ from backend.core.config import settings
 class IdPkMixin:
     """Миксин для динамического определения типа ID."""
 
-    id_type_class = settings.db.id_type_class
-
-    id: Mapped[id_type_class.get_id_type()] = mapped_column(
+    id: Mapped[settings.db.id_type_class.get_id_type()] = mapped_column(
         primary_key=True,
-        default=uuid.uuid4 if id_type_class.get_id_type() == uuid.UUID else None,
+        default=(
+            uuid.uuid4 if settings.db.id_type_class.get_id_type() == uuid.UUID else None
+        ),
     )
