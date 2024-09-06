@@ -3,6 +3,7 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 from backend.base_api.api.router import router as router_api
+from fastapi.responses import ORJSONResponse
 
 # from backend.base_api.v1.router_websocket import router as router_websocket
 from contextlib import asynccontextmanager
@@ -31,7 +32,10 @@ async def lifespan(app: FastAPI):
             pass
 
 
-main_app = FastAPI(lifespan=lifespan)
+main_app = FastAPI(
+    lifespan=lifespan,
+    default_response_class=ORJSONResponse,
+)
 
 main_app.include_router(
     router_api,
