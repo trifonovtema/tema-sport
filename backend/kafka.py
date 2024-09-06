@@ -54,18 +54,19 @@ class KafkaConsumer:
         self.settings = settings
         self.bootstrap_servers = self.settings.kafka.bootstrap_servers
         self.group_id = group_id
+
+        self.consumer_service = consumer_service
+        # self.websocket_clients: Dict[str, WebSocket] = {}
+        # self.pending_messages: Dict[str, List[KafkaMessage]] = {}
+        self.websocket_manager = WebSocketManager()
+        self.consumer = None
+    async def start(self):
         self.consumer = AIOKafkaConsumer(
             self.topic,
             bootstrap_servers=self.settings.kafka.bootstrap_servers,
             group_id=self.group_id,
             auto_offset_reset="earliest",
         )
-        self.consumer_service = consumer_service
-        # self.websocket_clients: Dict[str, WebSocket] = {}
-        # self.pending_messages: Dict[str, List[KafkaMessage]] = {}
-        self.websocket_manager = WebSocketManager()
-
-    async def start(self):
         await self.consumer.start()
 
     async def stop(self):
