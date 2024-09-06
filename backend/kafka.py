@@ -60,6 +60,7 @@ class KafkaConsumer:
         # self.pending_messages: Dict[str, List[KafkaMessage]] = {}
         self.websocket_manager = WebSocketManager()
         self.consumer = None
+
     async def start(self):
         self.consumer = AIOKafkaConsumer(
             self.topic,
