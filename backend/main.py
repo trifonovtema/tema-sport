@@ -31,13 +31,15 @@ async def lifespan(app: FastAPI):
             pass
 
 
-app = FastAPI(lifespan=lifespan)
+main_app = FastAPI(lifespan=lifespan)
 
-app.include_router(router_api)
+main_app.include_router(
+    router_api,
+)
 
 if __name__ == "__main__":
     uvicorn.run(
-        "main:app",
+        "main:main_app",
         host=settings.run.host,
         port=settings.run.port,
         reload=True,
