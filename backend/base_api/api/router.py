@@ -3,6 +3,6 @@ from .v1.router import router as router_api_v1
 from backend.core.config import settings
 
 router = APIRouter(
-    prefix=settings.base_api.prefix,
+    prefix=settings.api.prefix,
 )
 router.include_router(router_api_v1)

@@ -13,10 +13,9 @@ from backend.base_api.api.v1.users.fastapi_users_router import (
 from backend.core.config import settings
 
 router = APIRouter(
-    prefix=settings.base_api.v1.auth,
+    prefix=settings.api.v1.auth,
     tags=["Auth"],
 )
-
 # /login and /logout
 router.include_router(
     fastapi_users.get_auth_router(

@@ -4,5 +4,5 @@ from backend.core.config import settings
 
 
 bearer_transport = BearerTransport(
-    tokenUrl=settings.base_api.bearer_token_url,
+    tokenUrl=settings.api.bearer_token_url,
 )
