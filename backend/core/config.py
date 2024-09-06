@@ -1,4 +1,5 @@
 import logging
+import os
 from functools import lru_cache
 from dotenv import load_dotenv, find_dotenv
 from pydantic import PostgresDsn, RedisDsn, BaseModel
@@ -10,7 +11,13 @@ from backend.core.types.id import IdType, IdTypeUuid, IdTypeInt
 
 logger = logging.getLogger(__name__)
 
-load_dotenv(find_dotenv())
+APP_PREFIX = "APP_CONFIG__"
+
+dotenv_path = find_dotenv()
+if load_dotenv(dotenv_path):
+    print(f".env file loaded from {dotenv_path}")
+else:
+    print(f"Failed to load .env file from {dotenv_path}")
 
 
 class RunConfig(BaseModel):
@@ -18,15 +25,15 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
-class BaseApiV1Prefix(BaseModel):
+class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     users: str = "/users"
     auth: str = "/auth"
 
 
-class BaseApiPrefix(BaseModel):
+class ApiPrefix(BaseModel):
     prefix: str = "/api"
-    v1: BaseApiV1Prefix = BaseApiV1Prefix()
+    v1: ApiV1Prefix = ApiV1Prefix()
 
     @property
     def bearer_token_url(self) -> str:
@@ -36,14 +43,14 @@ class BaseApiPrefix(BaseModel):
         return path.removeprefix("/")
 
 
-class KafkaConfig(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
-        case_sensitive=False,
-        env_nested_delimiter="__",
-        env_prefix="KAFKA__",
-        extra="ignore",
-    )
+class KafkaConfig(BaseModel):
+    # model_config = SettingsConfigDict(
+    #     env_file=(".env.template", ".env"),
+    #     case_sensitive=False,
+    #     env_nested_delimiter="__",
+    #     env_prefix=APP_PREFIX + "KAFKA__",
+    #     extra="ignore",
+    # )
     SERVER: str
     PORT: int
 
@@ -52,14 +59,7 @@ class KafkaConfig(BaseSettings):
         return f"{self.SERVER}:{self.PORT}"
 
 
-class RedisConfig(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
-        case_sensitive=False,
-        env_nested_delimiter="__",
-        env_prefix="REDIS__",
-        extra="ignore",
-    )
+class RedisConfig(BaseModel):
     HOST: str
     PORT: str
 
@@ -67,14 +67,7 @@ class RedisConfig(BaseSettings):
         return URL.create(drivername="redis", host=self.HOST, port=int(self.PORT))
 
 
-class DatabaseConfig(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
-        case_sensitive=False,
-        env_nested_delimiter="__",
-        env_prefix="DB__",
-        extra="ignore",
-    )
+class DatabaseConfig(BaseModel):
     USER: str
     PASSWORD: str
     HOST: str
@@ -123,37 +116,33 @@ class DatabaseConfig(BaseSettings):
     }
 
 
-class AccessToken(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
-        case_sensitive=False,
-        env_nested_delimiter="__",
-        env_prefix="ACCESS_TOKEN__",
-        extra="ignore",
-    )
+class AccessToken(BaseModel):
     lifetime_seconds: int = 3600
     reset_password_token_secret: str
     verification_token_secret: str
 
 
 class Settings(BaseSettings):
-    db: DatabaseConfig = DatabaseConfig()
-    kafka: KafkaConfig = KafkaConfig()
-    redis: RedisConfig = RedisConfig()
-    access_token: AccessToken = AccessToken()
-    base_api: BaseApiPrefix = BaseApiPrefix()
+    model_config = SettingsConfigDict(
+        env_file=(".env.template", ".env"),
+        case_sensitive=False,
+        env_nested_delimiter="__",
+        env_prefix=APP_PREFIX,
+        extra="ignore",
+    )
+    db: DatabaseConfig
+    kafka: KafkaConfig
+    redis: RedisConfig
+    access_token: AccessToken
+    api: ApiPrefix = ApiPrefix()
     run: RunConfig = RunConfig()
-
-    # model_config = SettingsConfigDict(env_file=DOTENV,
-    #                                   env_file_encoding="utf-8",
-    #                                   extra='ignore')
 
 
 @lru_cache
-def get_settings1() -> Settings:
+def get_settings() -> Settings:
     res = Settings()
     debug(res)
     return Settings()
 
 
-settings = get_settings1()
+settings = get_settings()
