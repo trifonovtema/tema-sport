@@ -1,47 +1,29 @@
 from uuid import UUID
 
 from pydantic import BaseModel
-from backend.constants import Penalty, CourseSegmentType
+from pydantic import AliasPath, BaseModel, ConfigDict, Field
 
 from datetime import datetime
 
-
-class Competition(BaseModel):
-    id: UUID | None = None
-    name: str | None = None
+from core.config import settings
 
 
-class ProcessCompetition(BaseModel):
-    id: UUID | None = None
-    competition: Competition | None = None
-
-    class Config:
-        from_attributes = True
-        json_encoders = {UUID: lambda v: str(v)}
+class BaseRun(BaseModel):
+    user_id: settings.db.id_type_class.get_id_type() | None
+    race_id: settings.db.id_type_class.get_id_type() | None
+    name: str | None
+    # scheduled_time: datetime | None
 
 
-class Race(BaseModel):
-    id: UUID | None = None
-    competition_id: UUID
-    name: str
+class ReadRun(BaseRun):
+    id: settings.db.id_type_class.get_id_type()
+    # created_at: datetime | None
+    model_config = ConfigDict(from_attributes=True)
 
 
-class Run(BaseModel):
-    user_id: UUID
-    race_id: UUID
-    name: str
-    scheduled_time: datetime
+class UpdateRun(BaseRun):
+    pass
 
 
-class GatePenalty(BaseModel):
-    penalty: Penalty
-    note: str
-
-
-class CourseSegment(BaseModel):
-    id: UUID
-    number: int
-    run_id: UUID
-    type: CourseSegmentType
-    penalty: GatePenalty | None = None
-    split_time: datetime | None = None
+class CreateRun(BaseRun):
+    pass
