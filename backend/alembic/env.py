@@ -24,7 +24,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from core.models import Base
-from core.config import get_settings
+from core.config import settings
 
 target_metadata = Base.metadata
 
@@ -34,7 +34,7 @@ target_metadata = Base.metadata
 # ... etc.
 config.set_main_option(
     "sqlalchemy.url",
-    get_settings().db.get_db_url().render_as_string(hide_password=False),
+    settings.db.get_db_url().render_as_string(hide_password=False),
 )
 
 
@@ -67,12 +67,11 @@ def do_run_migrations(connection: Connection) -> None:
         connection=connection,
         target_metadata=target_metadata,
         version_table_schema=ALEMBIC_VERSION_SCHEMA,
+        compare_type=True,
+        include_schemas=True,
     )
-
-    connection.execute(CreateSchema(ALEMBIC_VERSION_SCHEMA, if_not_exists=True))
-    with context.begin_transaction():
-        context.run_migrations()
-
+    # print("------------------------------")
+    # print(Base.metadata.tables.keys())
     connection.execute(CreateSchema(ALEMBIC_VERSION_SCHEMA, if_not_exists=True))
     with context.begin_transaction():
         context.run_migrations()
