@@ -18,6 +18,7 @@ class BaseRun(BaseModel):
 class ReadRun(BaseRun):
     id: settings.db.id_type_class.get_id_type()
     created_at: datetime | None
+    updated_at: datetime | None
     model_config = ConfigDict(from_attributes=True)
 
 
