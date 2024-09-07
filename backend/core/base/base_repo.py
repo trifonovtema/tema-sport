@@ -7,13 +7,20 @@ from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.base.types import CreateSchemaType, ModelType, UpdateSchemaType
+from core.base.types import (
+    CreateSchemaType,
+    ModelType,
+    UpdateSchemaType,
+    FilterSchemaType,
+)
 from core.config import settings
 from core.models import Base
 from sqlalchemy import Boolean, ForeignKey, Integer, String, func, select
 
 
-class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
+class BaseRepository(
+    Generic[ModelType, CreateSchemaType, UpdateSchemaType, FilterSchemaType]
+):
     def __init__(self, model: Type[ModelType], session: AsyncSession):
         """
         CRUD Repository for database operations
@@ -37,17 +44,25 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     async def get(
         self,
-        skip: int = 0,
-        limit: int = 100,
+        skip: int,
+        limit: int,
+        filters: FilterSchemaType = None,
     ) -> Sequence[ModelType]:
         """
         Retrieve multiple objects with pagination
-        :param db: Database session
         :param skip: Number of records to skip
         :param limit: Maximum number of records to return
+        :param filters: Filter parameters
         :return: List of objects
         """
-        stmt = select(self.model).offset(skip).limit(limit)
+        stmt = select(self.model)
+        if filters:
+            filter_data = filters.model_dump(exclude_unset=True)
+            for field, value in filter_data.items():
+                if value is not None and hasattr(self.model, field):
+                    column = getattr(self.model, field)
+                    stmt = stmt.where(column == value)
+        stmt = stmt.order_by(self.model.created_at).offset(skip).limit(limit)
         result = await self.session.scalars(stmt)
         return result.all()
 
@@ -77,7 +92,7 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         :param obj_in: Data for updating the object
         :return: The updated object
         """
-        update_data = obj_in.model_dump()
+        update_data = obj_in.model_dump(exclude_unset=True)
         for field, value in update_data.items():
             if hasattr(db_obj, field):
                 setattr(db_obj, field, value)

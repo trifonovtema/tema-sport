@@ -6,6 +6,7 @@ from core.base.types import (
     ReadSchemaType,
     CreateSchemaType,
     UpdateSchemaType,
+    FilterSchemaType,
 )
 from core.config import settings
 
@@ -13,7 +14,7 @@ from core.config import settings
 ManagerType = TypeVar("ManagerType", bound=BaseManager)
 
 
-class BaseService(Generic[ReadSchemaType, ManagerType]):
+class BaseService(Generic[ReadSchemaType, ManagerType, FilterSchemaType]):
     def __init__(self, manager: ManagerType):
         """
         Service for handling business logic
@@ -31,6 +32,20 @@ class BaseService(Generic[ReadSchemaType, ManagerType]):
         :return: The object if found, otherwise None
         """
         return await self.manager.get_by_id(obj_id)
+
+    async def get(
+        self,
+        filters: FilterSchemaType = None,
+        page: int = 1,
+        size: int = 100,
+    ) -> list[ReadSchemaType]:
+        """
+        Retrieve an object using the repository
+        :return: The object if found, otherwise None
+        """
+        skip = (page - 1) * size
+        limit = size
+        return await self.manager.get(filters=filters, skip=skip, limit=limit)
 
     async def create(
         self,

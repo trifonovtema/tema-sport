@@ -8,13 +8,14 @@ from core.base.types import (
     CreateSchemaType,
     UpdateSchemaType,
     ReadSchemaType,
+    FilterSchemaType,
 )
 from core.config import settings
 
 RepositoryType = TypeVar("RepositoryType", bound=BaseRepository)
 
 
-class BaseManager(Generic[ReadSchemaType, RepositoryType]):
+class BaseManager(Generic[ReadSchemaType, RepositoryType, FilterSchemaType]):
     def __init__(
         self,
         repository: RepositoryType,
@@ -39,6 +40,28 @@ class BaseManager(Generic[ReadSchemaType, RepositoryType]):
 
         obj = await self.repository.get_by_id(model_id=obj_id)
         return self.read_schema.model_validate(obj)
+
+    async def get(
+        self,
+        filters: FilterSchemaType = None,
+        skip: int = 0,
+        limit: int = 100,
+    ) -> list[ReadSchemaType]:
+        """
+        Retrieve an object using the repository
+        :skip: int = 0,
+        :limit: int = 100,
+        :return: The object if found, otherwise None
+        """
+        objects = await self.repository.get(
+            limit=limit,
+            skip=skip,
+            filters=filters,
+        )
+        res: list[ReadSchemaType] = []
+        for obj in objects:
+            res.append(self.read_schema.model_validate(obj))
+        return res
 
     async def create(self, obj_in: CreateSchemaType) -> ReadSchemaType:
         """
