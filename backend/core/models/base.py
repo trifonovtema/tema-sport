@@ -3,11 +3,13 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import declared_attr
 
 from core.config import settings
+from core.models.mixins.created_at import CreatedAtMixin
+from core.models.mixins.updated_at import UpdatedAtMixin
 from utils.snake_converter import camel_case_to_snake_case
 from core.models.mixins.id_pk import IdPkMixin
 
 
-class Base(IdPkMixin, DeclarativeBase):
+class Base(IdPkMixin, CreatedAtMixin, UpdatedAtMixin, DeclarativeBase):
     __abstract__ = True
 
     metadata = MetaData(
