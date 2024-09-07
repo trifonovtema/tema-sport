@@ -30,6 +30,7 @@ class ApiV1Prefix(BaseModel):
     users: str = "/users"
     auth: str = "/auth"
     runs: str = "/runs"
+    races: str = "/races"
 
 
 class ApiPrefix(BaseModel):
@@ -76,7 +77,7 @@ class DatabaseConfig(BaseModel):
     PORT: str
     SCHEMA: str
 
-    echo: bool = True
+    echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
     max_overflow: int = 10
