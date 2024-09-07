@@ -76,17 +76,15 @@ class DatabaseConfig(BaseModel):
     PORT: str
     SCHEMA: str
 
-    echo: bool = False
+    echo: bool = True
     echo_pool: bool = False
     pool_size: int = 50
     max_overflow: int = 10
 
-    # id_type: IdType = IdTypeUuid()
-    id_type: str = "uuid"  # можно менять на "int" для int ID
+    id_type: str = "uuid"  # "int"
 
     @property
     def id_type_class(self) -> IdType:
-        """Фабричный метод для получения класса типа ID."""
         if self.id_type == "uuid":
             return IdTypeUuid()
         elif self.id_type == "int":
