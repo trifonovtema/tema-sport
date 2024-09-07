@@ -20,17 +20,17 @@ async def lifespan(app: FastAPI):
     Asynchronous context manager to manage application lifespan events,
     such as setup at startup and cleanup at shutdown.
     """
-    user = await create_superuser()
-    tasks = await kafka_consumer_manager.start_all()
+    # user = await create_superuser()
+    # tasks = await kafka_consumer_manager.start_all()
     yield
-    await kafka_consumer_manager.stop_all()
+    # await kafka_consumer_manager.stop_all()
     await db_helper.dispose()
-    for task in tasks:
-        task.cancel()
-        try:
-            await task
-        except asyncio.CancelledError:
-            pass
+    # for task in tasks:
+    #     task.cancel()
+    #     try:
+    #         await task
+    #     except asyncio.CancelledError:
+    #         pass
 
 
 main_app = FastAPI(
