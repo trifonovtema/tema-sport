@@ -4,7 +4,7 @@ from fastapi_users_db_sqlalchemy.generics import GUID, TIMESTAMPAware, now_utc
 
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
-from sqlalchemy import func
+from sqlalchemy import func, TIMESTAMP
 
 # from sqlalchemy import text
 
@@ -26,6 +26,7 @@ from core.config import settings
 class CreatedAtMixin:
 
     created_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP(timezone=True),
         server_default=func.now(),
-        default=datetime.now(timezone.utc),
+        default=lambda: datetime.now(timezone.utc),
     )
