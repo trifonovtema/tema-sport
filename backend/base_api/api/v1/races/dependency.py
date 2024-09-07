@@ -1,13 +1,10 @@
 from fastapi import Depends
-from core.base.base_manager import BaseManager
-from core.base.base_repo import BaseRepository
-from core.base.base_service import BaseService
+from core.base.control_classes.base_manager import BaseManager
+from core.base.control_classes.base_repo import BaseRepository
+from core.base.control_classes.base_service import BaseService
 from core.models import db_helper, Race
-from typing import AsyncGenerator, Annotated
+from typing import Annotated
 from sqlalchemy.ext.asyncio import (
-    create_async_engine,
-    AsyncEngine,
-    async_sessionmaker,
     AsyncSession,
 )
 from core.schemas.race import CreateRace, UpdateRace, ReadRace, FilterRace
@@ -17,17 +14,12 @@ class RaceRepository(BaseRepository[Race, CreateRace, UpdateRace, FilterRace]):
     pass
 
 
-class RaceManager(BaseManager[ReadRace, RaceRepository, FilterRace]):
+class RaceManager(BaseManager[RaceRepository, ReadRace, FilterRace]):
     pass
 
 
-class RaceService(BaseService[ReadRace, RaceManager, FilterRace]):
+class RaceService(BaseService[RaceManager, ReadRace, FilterRace]):
     pass
-
-
-# async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
-#     async with db_helper.session_getter() as session:
-#         yield session
 
 
 async def get_async_session() -> AsyncSession:
