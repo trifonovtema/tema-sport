@@ -1,3 +1,4 @@
+import contextlib
 from typing import AsyncGenerator
 
 
@@ -42,6 +43,17 @@ class DatabaseHelper:
     async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
         async with self.session_factory() as session:
             yield session
+
+    @contextlib.asynccontextmanager
+    async def session_dependency(self) -> AsyncSession:
+        """
+        This session is created and closed for each request.
+        """
+        async with self.session_factory() as session:
+            try:
+                yield session
+            finally:
+                await session.close()
 
     # Use for more control
     # @contextlib.asynccontextmanager
