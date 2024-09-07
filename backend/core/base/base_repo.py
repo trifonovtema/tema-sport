@@ -1,7 +1,8 @@
 from collections.abc import Sequence
+from devtools import debug
 
 from sqlalchemy.orm import Session
-from typing import Generic, TypeVar, Type, Optional, List
+from typing import Generic, TypeVar, Type, Optional, List, Callable
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.ext.asyncio import AsyncSession
