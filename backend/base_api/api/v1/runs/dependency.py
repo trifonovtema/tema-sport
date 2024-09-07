@@ -2,7 +2,6 @@ from fastapi import Depends
 from core.base.base_manager import BaseManager
 from core.base.base_repo import BaseRepository
 from core.base.base_service import BaseService
-from core.base.factories.factory import Factory
 from core.models import db_helper, Run
 from typing import AsyncGenerator, Annotated
 from sqlalchemy.ext.asyncio import (
@@ -11,18 +10,18 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     AsyncSession,
 )
-from core.schemas.run import CreateRun, UpdateRun, ReadRun
+from core.schemas.run import CreateRun, UpdateRun, ReadRun, FilterRun
 
 
-class RunRepository(BaseRepository[Run, CreateRun, UpdateRun]):
+class RunRepository(BaseRepository[Run, CreateRun, UpdateRun, FilterRun]):
     pass
 
 
-class RunManager(BaseManager[ReadRun, RunRepository]):
+class RunManager(BaseManager[ReadRun, RunRepository, FilterRun]):
     pass
 
 
-class RunService(BaseService[ReadRun, RunManager]):
+class RunService(BaseService[ReadRun, RunManager, FilterRun]):
     pass
 
 
