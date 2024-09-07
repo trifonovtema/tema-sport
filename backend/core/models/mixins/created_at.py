@@ -1,7 +1,10 @@
 import uuid
+from datetime import datetime, timezone
+from fastapi_users_db_sqlalchemy.generics import GUID, TIMESTAMPAware, now_utc
 
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
+from sqlalchemy import func
 
 # from sqlalchemy import text
 
@@ -20,12 +23,9 @@ from core.config import settings
 #         id: Mapped[int] = mapped_column(primary_key=True)
 
 
-class IdPkMixin:
-    """Миксин для динамического определения типа ID."""
+class CreatedAtMixin:
 
-    id: Mapped[settings.db.id_type_class.get_id_type()] = mapped_column(
-        primary_key=True,
-        default=(
-            uuid.uuid4 if settings.db.id_type_class.get_id_type() == uuid.UUID else None
-        ),
+    created_at: Mapped[datetime] = mapped_column(
+        server_default=func.now(),
+        default=datetime.now(timezone.utc),
     )

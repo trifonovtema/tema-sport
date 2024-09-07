@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
 from .user import User
-from backend.core.config import settings
+from core.config import settings
 
 
 if TYPE_CHECKING:

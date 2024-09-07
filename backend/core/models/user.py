@@ -4,7 +4,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserD
 
 from .base import Base
 from .mixins.id_pk import IdPkMixin
-from backend.core.config import settings
+from core.config import settings
 
 
 if TYPE_CHECKING:
@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 class User(
     Base,
-    IdPkMixin,
     SQLAlchemyBaseUserTable[settings.db.id_type_class.get_id_type()],
 ):
 

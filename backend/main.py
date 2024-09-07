@@ -1,16 +1,17 @@
 import asyncio
+from asyncio import tasks
 
 import uvicorn
 from fastapi import FastAPI
-from backend.base_api.api.router import router as router_api
+from base_api.api.router import router as router_api
 from fastapi.responses import ORJSONResponse
 
-# from backend.base_api.v1.router_websocket import router as router_websocket
+# from base_api.v1.router_websocket import router as router_websocket
 from contextlib import asynccontextmanager
-from backend.base_api.api.v1.kafka_consumers import kafka_consumer_manager
-from backend.core.models import db_helper
-from backend.actions.create_superuser import create_superuser
-from backend.core.config import settings
+from base_api.api.v1.kafka_consumers import kafka_consumer_manager
+from core.models import db_helper
+from actions.create_superuser import create_superuser
+from core.config import settings
 
 
 @asynccontextmanager

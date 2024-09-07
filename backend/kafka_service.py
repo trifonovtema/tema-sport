@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 from typing import List
 from time import time
 import uuid
-from backend.kafka import KafkaProducerService, KafkaConsumer, ConsumerServiceBase
-from backend.core.schemas.kafka import KafkaMessageHeader, KafkaMessage
-from backend.core.schemas.common import APIResponse
-from backend.constants import KafkaTopic, MessageType, APIResponseStatus
+from kafka import KafkaProducerService, KafkaConsumer, ConsumerServiceBase
+from core.schemas.kafka import KafkaMessageHeader, KafkaMessage
+from core.schemas.common import APIResponse
+from constants import KafkaTopic, MessageType, APIResponseStatus
 
 
 class KafkaServiceBase(ABC):

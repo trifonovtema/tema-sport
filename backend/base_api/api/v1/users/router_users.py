@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from backend.core.schemas.user import UserRead, UserUpdate
-from backend.base_api.api.v1.users.fastapi_users_router import fastapi_users
-from backend.core.config import settings
+from core.schemas.user import UserRead, UserUpdate
+from base_api.api.v1.users.fastapi_users_router import fastapi_users
+from core.config import settings
 
 
 router = APIRouter(

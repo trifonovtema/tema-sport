@@ -1,7 +1,7 @@
 import json
 
-from backend.core.schemas.kafka import KafkaMessage
-from backend.core.config import settings
+from core.schemas.kafka import KafkaMessage
+from core.config import settings
 from fastapi import WebSocket, WebSocketDisconnect
 from redis.asyncio import Redis
 

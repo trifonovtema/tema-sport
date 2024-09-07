@@ -1,5 +1,5 @@
-from backend.constants import KafkaTopic, GroupId
-from backend.kafka_service import KafkaConsumerManager
+from constants import KafkaTopic, GroupId
+from kafka_service import KafkaConsumerManager
 
 kafka_consumer_manager = KafkaConsumerManager()
 

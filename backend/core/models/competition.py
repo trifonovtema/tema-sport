@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
-class Competition(Base, IdPkMixin):
+class Competition(Base):
     if TYPE_CHECKING:  # pragma: no cover
         id: settings.db.id_type_class.get_id_type()
         name: str

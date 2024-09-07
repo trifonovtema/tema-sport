@@ -1,6 +1,6 @@
 from fastapi_users import schemas
 
-from backend.core.config import settings
+from core.config import settings
 
 
 class UserRead(schemas.BaseUser[settings.db.id_type_class.get_id_type()]):

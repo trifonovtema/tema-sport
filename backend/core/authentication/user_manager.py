@@ -2,8 +2,8 @@ from typing import TYPE_CHECKING, Optional
 
 from fastapi_users import BaseUserManager
 
-from backend.core.models import User
-from backend.core.config import settings
+from core.models import User
+from core.config import settings
 import logging
 
 if TYPE_CHECKING:

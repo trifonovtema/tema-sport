@@ -1,11 +1,11 @@
 import asyncio
 import contextlib
 
-from backend.core.authentication.user_manager import UserManager
-from backend.core.models import db_helper, User
-from backend.dependencies.authentication.users import get_users_db
-from backend.core.schemas.user import UserCreate
-from backend.dependencies.authentication.user_manager import get_user_manager
+from core.authentication.user_manager import UserManager
+from core.models import db_helper, User
+from dependencies.authentication.users import get_users_db
+from core.schemas.user import UserCreate
+from dependencies.authentication.user_manager import get_user_manager
 
 
 from fastapi_users.exceptions import UserAlreadyExists

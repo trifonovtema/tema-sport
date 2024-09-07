@@ -25,7 +25,7 @@ class User(Base):
 
 
 class Competition(Base):
-    __tablename__ = "competition"
+    __tablename__ = "base"
     __table_args__ = {"schema": "tema_sport"}
 
     id = Column(

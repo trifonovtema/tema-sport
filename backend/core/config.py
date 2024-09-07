@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 from devtools import debug
 from uuid import UUID
-from backend.core.types.id import IdType, IdTypeUuid, IdTypeInt
+from core.types.id import IdType, IdTypeUuid, IdTypeInt
 
 logger = logging.getLogger(__name__)
 

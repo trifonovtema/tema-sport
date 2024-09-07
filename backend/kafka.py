@@ -4,11 +4,11 @@ from abc import ABC
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer
 import json
 
-from backend.base_api.api.v1.websocket_manager import WebSocketManager
-from backend.core.schemas.kafka import KafkaMessage
-from backend.core.config import settings
+from base_api.api.v1.websocket_manager import WebSocketManager
+from core.schemas.kafka import KafkaMessage
+from core.config import settings
 from fastapi import WebSocket, WebSocketDisconnect
-from backend.constants import KafkaTopic
+from constants import KafkaTopic
 
 
 class KafkaProducerService:
