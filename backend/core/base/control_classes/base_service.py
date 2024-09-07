@@ -1,8 +1,6 @@
 from typing import Generic, TypeVar, Optional
-from sqlalchemy.ext.asyncio import AsyncSession
-from core.base.base_manager import BaseManager
+from core.base.control_classes.base_manager import BaseManager
 from core.base.types import (
-    ModelType,
     ReadSchemaType,
     CreateSchemaType,
     UpdateSchemaType,
@@ -14,7 +12,7 @@ from core.config import settings
 ManagerType = TypeVar("ManagerType", bound=BaseManager)
 
 
-class BaseService(Generic[ReadSchemaType, ManagerType, FilterSchemaType]):
+class BaseService(Generic[ManagerType, ReadSchemaType, FilterSchemaType]):
     def __init__(self, manager: ManagerType):
         """
         Service for handling business logic

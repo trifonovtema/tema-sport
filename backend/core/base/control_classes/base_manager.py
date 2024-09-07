@@ -1,10 +1,6 @@
 from typing import Generic, TypeVar, Optional, Type
-from pydantic import BaseModel
-from core.base.base_repo import BaseRepository
-from sqlalchemy.ext.asyncio import AsyncSession
-from devtools import debug
+from core.base.control_classes.base_repo import BaseRepository
 from core.base.types import (
-    ModelType,
     CreateSchemaType,
     UpdateSchemaType,
     ReadSchemaType,
@@ -15,7 +11,7 @@ from core.config import settings
 RepositoryType = TypeVar("RepositoryType", bound=BaseRepository)
 
 
-class BaseManager(Generic[ReadSchemaType, RepositoryType, FilterSchemaType]):
+class BaseManager(Generic[RepositoryType, ReadSchemaType, FilterSchemaType]):
     def __init__(
         self,
         repository: RepositoryType,
