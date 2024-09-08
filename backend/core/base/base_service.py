@@ -1,5 +1,5 @@
 from typing import Generic, TypeVar, Optional
-from core.base.control_classes.base_manager import BaseManager
+from core.base.base_manager import BaseManager
 from core.base.types import (
     ReadSchemaType,
     CreateSchemaType,
@@ -56,7 +56,7 @@ class BaseService(Generic[ManagerType, ReadSchemaType, FilterSchemaType]):
         """
         return await self.manager.create(obj_in)
 
-    async def update(
+    async def edit(
         self,
         obj_id: settings.db.id_type_class.get_id_type(),
         obj_in: UpdateSchemaType,
@@ -67,7 +67,7 @@ class BaseService(Generic[ManagerType, ReadSchemaType, FilterSchemaType]):
         :param obj_in: Data for updating the object
         :return: The updated object
         """
-        return await self.manager.update(
+        return await self.manager.edit(
             obj_id=obj_id,
             obj_in=obj_in,
         )

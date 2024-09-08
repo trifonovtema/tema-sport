@@ -1,8 +1,4 @@
-from typing import Any
-from pydantic import BaseModel, Field
-from datetime import datetime
-from backend.constants import KafkaTopic, MessageType
-from backend.core.types.event import EventType
+from pydantic import BaseModel
 from uuid import UUID
 
 

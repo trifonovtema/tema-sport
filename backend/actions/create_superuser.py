@@ -1,11 +1,11 @@
 import asyncio
 import contextlib
 
-from core.authentication.user_manager import UserManager
+from base_api.api.v1.users.auth.user_manager import UserManager
 from core.models import db_helper, User
-from dependencies.authentication.users import get_users_db
+from base_api.api.v1.users.auth.dependencies.users import get_users_db
 from core.schemas.user import UserCreate
-from dependencies.authentication.user_manager import get_user_manager
+from base_api.api.v1.users.auth.dependencies.user_manager import get_user_manager
 
 
 from fastapi_users.exceptions import UserAlreadyExists
@@ -54,7 +54,7 @@ async def create_superuser(
                         user_create=user_create,
                     )
     except UserAlreadyExists:
-        print(f"SuperUser already exists")
+        print("SuperUser already exists")
 
 
 if __name__ == "__main__":

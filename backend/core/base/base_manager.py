@@ -1,5 +1,5 @@
 from typing import Generic, TypeVar, Optional, Type
-from core.base.control_classes.base_repo import BaseRepository
+from core.base.base_repo import BaseRepository
 from core.base.types import (
     CreateSchemaType,
     UpdateSchemaType,
@@ -68,7 +68,7 @@ class BaseManager(Generic[RepositoryType, ReadSchemaType, FilterSchemaType]):
         created_obj = await self.repository.create(obj_in)
         return self.read_schema.model_validate(created_obj)
 
-    async def update(
+    async def edit(
         self,
         obj_id: settings.db.id_type_class.get_id_type(),
         obj_in: UpdateSchemaType,
@@ -80,8 +80,12 @@ class BaseManager(Generic[RepositoryType, ReadSchemaType, FilterSchemaType]):
         :return: The updated object
         """
         db_obj = await self.repository.get_by_id(model_id=obj_id)
-        updated_obj = await self.repository.update(db_obj, obj_in)
-        return self.read_schema.model_validate(updated_obj)
+        if db_obj:
+            updated_obj = await self.repository.edit(db_obj, obj_in)
+            return self.read_schema.model_validate(updated_obj)
+        else:
+            # TODO process situation where obj not found
+            pass
 
     async def delete(
         self,

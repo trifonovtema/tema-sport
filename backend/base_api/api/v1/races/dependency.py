@@ -1,7 +1,7 @@
 from fastapi import Depends
-from core.base.control_classes.base_manager import BaseManager
-from core.base.control_classes.base_repo import BaseRepository
-from core.base.control_classes.base_service import BaseService
+from core.base.base_manager import BaseManager
+from core.base.base_repo import BaseRepository
+from core.base.base_service import BaseService
 from core.models import db_helper, Race
 from typing import Annotated
 from sqlalchemy.ext.asyncio import (

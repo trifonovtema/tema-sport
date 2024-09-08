@@ -1,7 +1,7 @@
 """create schema
 
 Revision ID: b7d6bfbaae14
-Revises: 
+Revises:
 Create Date: 2024-09-04 18:01:04.789790
 
 """
@@ -9,7 +9,6 @@ Create Date: 2024-09-04 18:01:04.789790
 from typing import Sequence, Union
 
 from alembic import op
-import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.

@@ -1,5 +1,5 @@
-import asyncio
-from asyncio import tasks
+# import asyncio
+# from asyncio import tasks
 
 import uvicorn
 from fastapi import FastAPI
@@ -8,10 +8,13 @@ from fastapi.responses import ORJSONResponse
 
 # from base_api.v1.router_websocket import router as router_websocket
 from contextlib import asynccontextmanager
-from base_api.api.v1.kafka_consumers import kafka_consumer_manager
+
+# from base_api.api.v1.kafka_consumers import kafka_consumer_manager
 from core.models import db_helper
-from actions.create_superuser import create_superuser
+
+# from actions.create_superuser import create_superuser
 from core.config import settings
+from fastapi.middleware.cors import CORSMiddleware
 
 
 @asynccontextmanager
@@ -36,6 +39,20 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(
     lifespan=lifespan,
     default_response_class=ORJSONResponse,
+)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000",
+]
+
+main_app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 main_app.include_router(

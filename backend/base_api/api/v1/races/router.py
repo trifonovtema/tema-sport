@@ -6,8 +6,6 @@ from devtools import debug
 
 from base_api.api.v1.races.dependency import RaceService, get_race_service
 from core.schemas.race import CreateRace, UpdateRace, FilterRace
-from core.schemas.user import UserRead, UserUpdate
-from base_api.api.v1.users.fastapi_users_router import fastapi_users
 from core.config import settings
 
 
@@ -61,7 +59,7 @@ async def get_races(
 
 
 @router.delete("/{race_id}")
-async def get_races(
+async def delete_races(
     race_id: settings.db.id_type_class.get_id_type(),
     race_service: Annotated[
         RaceService,
@@ -75,7 +73,7 @@ async def get_races(
 
 
 @router.patch("/{race_id}")
-async def get_races(
+async def edit_races(
     race_id: settings.db.id_type_class.get_id_type(),
     race_update: UpdateRace,
     race_service: Annotated[
@@ -83,7 +81,7 @@ async def get_races(
         Depends(get_race_service),
     ],
 ):
-    res = await race_service.update(
+    res = await race_service.edit(
         obj_id=race_id,
         obj_in=race_update,
     )

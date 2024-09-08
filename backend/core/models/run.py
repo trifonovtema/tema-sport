@@ -2,10 +2,9 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from .base import Base
-from .mixins.created_at import CreatedAtMixin
 from core.config import settings
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, TIMESTAMP
+from sqlalchemy import TIMESTAMP
 
 
 class Run(Base):

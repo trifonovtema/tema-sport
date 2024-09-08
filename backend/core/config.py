@@ -1,12 +1,10 @@
 import logging
-import os
 from functools import lru_cache
 from dotenv import load_dotenv, find_dotenv
 from pydantic import PostgresDsn, RedisDsn, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 from devtools import debug
-from uuid import UUID
 from core.types.id import IdType, IdTypeUuid, IdTypeInt
 
 logger = logging.getLogger(__name__)

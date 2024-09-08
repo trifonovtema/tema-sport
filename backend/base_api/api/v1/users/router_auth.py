@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from devtools import debug
 from core.models import User
 from core.schemas.user import UserRead, UserCreate
-from dependencies.authentication.backend import authentication_backend
+from base_api.api.v1.users.auth.dependencies.backend import authentication_backend
 from base_api.api.v1.users.fastapi_users_router import (
     fastapi_users,
     current_user,

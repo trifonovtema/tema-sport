@@ -1,7 +1,4 @@
-from uuid import UUID
-
-from pydantic import BaseModel
-from pydantic import AliasPath, BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
 from datetime import datetime
 

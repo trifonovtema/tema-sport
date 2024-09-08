@@ -1,12 +1,6 @@
 from collections.abc import Sequence
-from devtools import debug
-
-from sqlalchemy.orm import Session
-from typing import Generic, TypeVar, Type, Optional, List, Callable
-from pydantic import BaseModel
-from fastapi.encoders import jsonable_encoder
+from typing import Generic, Type, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from core.base.types import (
     CreateSchemaType,
     ModelType,
@@ -14,8 +8,7 @@ from core.base.types import (
     FilterSchemaType,
 )
 from core.config import settings
-from core.models import Base
-from sqlalchemy import Boolean, ForeignKey, Integer, String, func, select
+from sqlalchemy import select
 
 
 class BaseRepository(
@@ -81,7 +74,7 @@ class BaseRepository(
         await self.session.refresh(db_obj)
         return db_obj
 
-    async def update(
+    async def edit(
         self,
         db_obj: ModelType,
         obj_in: UpdateSchemaType,

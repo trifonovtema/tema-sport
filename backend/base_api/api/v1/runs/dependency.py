@@ -1,8 +1,9 @@
 from fastapi import Depends
-from core.base.control_classes.base_manager import BaseManager
-from core.base.control_classes.base_repo import BaseRepository
-from core.base.control_classes.base_service import BaseService
-from core.models import db_helper, Run
+from core.base.base_manager import BaseManager
+from core.base.base_repo import BaseRepository
+from core.base.base_service import BaseService
+from dependencies.db.async_session import get_async_session
+from core.models import Run
 from typing import Annotated
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
@@ -20,14 +21,6 @@ class RunManager(BaseManager[RunRepository, ReadRun, FilterRun]):
 
 class RunService(BaseService[RunManager, ReadRun, FilterRun]):
     pass
-
-
-async def get_async_session() -> AsyncSession:
-    async with db_helper.session_factory() as session:
-        try:
-            yield session
-        finally:
-            await session.close()
 
 
 async def get_run_repo(

@@ -6,8 +6,6 @@ from devtools import debug
 
 from base_api.api.v1.runs.dependency import RunService, get_run_service
 from core.schemas.run import CreateRun, UpdateRun, FilterRun
-from core.schemas.user import UserRead, UserUpdate
-from base_api.api.v1.users.fastapi_users_router import fastapi_users
 from core.config import settings
 
 
@@ -18,7 +16,7 @@ router = APIRouter(
 
 
 @router.post("")
-async def create_run(
+async def create(
     run: CreateRun,
     run_service: Annotated[
         RunService,
@@ -26,12 +24,13 @@ async def create_run(
     ],
 ):
     debug(run)
+    debug(run_service)
     res = await run_service.create(run)
     return res
 
 
 @router.get("/{run_id}")
-async def get_run_by_id(
+async def get_by_id(
     run_id: settings.db.id_type_class.get_id_type(),
     run_service: Annotated[
         RunService,
@@ -43,7 +42,7 @@ async def get_run_by_id(
 
 
 @router.get("/")
-async def get_runs(
+async def get(
     run_service: Annotated[
         RunService,
         Depends(get_run_service),
@@ -61,7 +60,7 @@ async def get_runs(
 
 
 @router.delete("/{run_id}")
-async def get_runs(
+async def delete(
     run_id: settings.db.id_type_class.get_id_type(),
     run_service: Annotated[
         RunService,
@@ -75,7 +74,7 @@ async def get_runs(
 
 
 @router.patch("/{run_id}")
-async def get_runs(
+async def edit(
     run_id: settings.db.id_type_class.get_id_type(),
     run_update: UpdateRun,
     run_service: Annotated[
@@ -83,7 +82,7 @@ async def get_runs(
         Depends(get_run_service),
     ],
 ):
-    res = await run_service.update(
+    res = await run_service.edit(
         obj_id=run_id,
         obj_in=run_update,
     )

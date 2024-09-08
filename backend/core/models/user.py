@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 
 from .base import Base
-from .mixins.id_pk import IdPkMixin
 from core.config import settings
 
 
