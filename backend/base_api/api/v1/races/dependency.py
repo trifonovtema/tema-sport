@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
 )
 from core.schemas.race import CreateRace, UpdateRace, ReadRace, FilterRace
+from dependencies.db.async_session import get_async_session
 
 
 class RaceRepository(BaseRepository[Race, CreateRace, UpdateRace, FilterRace]):
@@ -20,14 +21,6 @@ class RaceManager(BaseManager[RaceRepository, ReadRace, FilterRace]):
 
 class RaceService(BaseService[RaceManager, ReadRace, FilterRace]):
     pass
-
-
-async def get_async_session() -> AsyncSession:
-    async with db_helper.session_factory() as session:
-        try:
-            yield session
-        finally:
-            await session.close()
 
 
 async def get_race_repo(
