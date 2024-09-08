@@ -1,14 +1,9 @@
-from fastapi import Depends
 from core.base.base_manager import BaseManager
 from core.base.base_repo import BaseRepository
 from core.base.base_service import BaseService
-from core.models import db_helper, Race
-from typing import Annotated
-from sqlalchemy.ext.asyncio import (
-    AsyncSession,
-)
+from core.base.create_dependencies_factory import create_dependency_factory
+from core.models import Race
 from core.schemas.race import CreateRace, UpdateRace, ReadRace, FilterRace
-from dependencies.db.async_session import get_async_session
 
 
 class RaceRepository(BaseRepository[Race, CreateRace, UpdateRace, FilterRace]):
@@ -23,19 +18,13 @@ class RaceService(BaseService[RaceManager, ReadRace, FilterRace]):
     pass
 
 
-async def get_race_repo(
-    session: Annotated[AsyncSession, Depends(get_async_session)],
-) -> RaceRepository:
-    return RaceRepository(Race, session)
-
-
-async def get_race_manager(
-    repo: Annotated[RaceRepository, Depends(get_race_repo)],
-) -> RaceManager:
-    return RaceManager(repo, ReadRace)
-
-
-async def get_race_service(
-    manager: Annotated[RaceManager, Depends(get_race_manager)],
-) -> RaceService:
-    return RaceService(manager)
+get_race_repo, get_race_manager, get_race_service = create_dependency_factory(
+    repo_class=RaceRepository,
+    manager_class=RaceManager,
+    service_class=RaceService,
+    model=Race,
+    create_schema=CreateRace,
+    update_schema=UpdateRace,
+    read_schema=ReadRace,
+    filter_schema=FilterRace,
+)
