@@ -2,7 +2,6 @@ from base_api.api.v1.races.dependency import RaceService, get_race_service
 from core.base.crud_router_factory import create_crud_router_factory
 from core.schemas.race import CreateRace, UpdateRace, FilterRace
 from core.config import settings
-from fastapi import APIRouter
 
 
 router = create_crud_router_factory(

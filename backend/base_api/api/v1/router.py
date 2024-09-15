@@ -5,6 +5,11 @@ from base_api.api.v1.users.router_auth import router as router_auth
 from base_api.api.v1.users.router_users import router as router_users
 from base_api.api.v1.runs.router import router as router_runs
 from base_api.api.v1.races.router import router as router_races
+from base_api.api.v1.course_elements.router import router as router_course_elements
+from base_api.api.v1.gates.router import router as router_gates
+from base_api.api.v1.splits.router import router as router_splits
+from base_api.api.v1.starts.router import router as router_starts
+from base_api.api.v1.finishes.router import router as router_finishes
 
 # from base_api.api.v1.router_websocket import router as router_websocket
 from core.config import settings
@@ -23,3 +28,8 @@ router.include_router(router_auth)
 router.include_router(router_users)
 router.include_router(router_runs)
 router.include_router(router_races)
+router.include_router(router_course_elements)
+router.include_router(router_gates)
+router.include_router(router_splits)
+router.include_router(router_starts)
+router.include_router(router_finishes)

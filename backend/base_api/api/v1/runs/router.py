@@ -1,10 +1,7 @@
-from typing import Annotated
-
 from base_api.api.v1.runs.dependency import RunService, get_run_service
 from core.base.crud_router_factory import create_crud_router_factory
 from core.schemas.run import CreateRun, UpdateRun, FilterRun
 from core.config import settings
-from fastapi import Depends
 
 
 router = create_crud_router_factory(
