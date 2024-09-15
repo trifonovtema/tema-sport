@@ -29,6 +29,11 @@ class ApiV1Prefix(BaseModel):
     auth: str = "/auth"
     runs: str = "/runs"
     races: str = "/races"
+    course_elements: str = "/course_elements"
+    gates: str = "/gates"
+    splits: str = "/splits"
+    starts: str = "/starts"
+    finishes: str = "/finishes"
 
 
 class ApiPrefix(BaseModel):
