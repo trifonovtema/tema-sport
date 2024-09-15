@@ -1,22 +1,24 @@
 __all__ = (
     "db_helper",
     "Base",
+    "BaseTable",
     "User",
     "AccessToken",
     "Run",
     "Race",
     "CourseElement",
-    "GateElement",
-    "SplitElement",
-    "StartElement",
-    "FinishElement",
+    "Gate",
+    "Split",
+    "Start",
+    "Finish",
 )
 from .db_helper import db_helper
 from .base import Base
-from .finish import FinishElement
-from .gate import GateElement
-from .split import SplitElement
-from .start import StartElement
+from .basetable import BaseTable
+from .finish import Finish
+from .gate import Gate
+from .split import Split
+from .start import Start
 from .user import User
 from .access_token import AccessToken
 from .run import Run
