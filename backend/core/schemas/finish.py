@@ -1,7 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from core.config import settings
-from core.types.enum_types import FinishType, GateType
 
 
 class BaseFinish(BaseModel):

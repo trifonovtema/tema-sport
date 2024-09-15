@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from core.config import settings
-from core.types.enum_types import CourseElementType, GateType
+from core.types.enum_types import GateType
 
 
 class BaseGate(BaseModel):
