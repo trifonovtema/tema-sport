@@ -68,7 +68,6 @@ def run_migrations_offline() -> None:
 
 def do_run_migrations(connection: Connection) -> None:
 
-
     def include_name(name, type_, parent_names):
         if type_ == "schema":
             # note this will not include the default schema
