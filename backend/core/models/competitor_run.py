@@ -2,7 +2,8 @@ import uuid
 from datetime import datetime
 from typing import Optional, List
 
-from core.models import BaseTable, Run
+from core.models.base import Base
+from core.models.run import Run
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Uuid, DateTime
 
@@ -12,7 +13,7 @@ from core.models.split_run import SplitRun
 from core.models.start_run import StartRun
 
 
-class CompetitorRun(BaseTable):
+class CompetitorRun(Base):
     competitor_id: Mapped[Optional[uuid.UUID]] = mapped_column(Uuid)
     scheduled_time: Mapped[Optional[datetime]] = mapped_column(DateTime(True))
     run_id: Mapped[Optional[uuid.UUID]] = mapped_column(Uuid)

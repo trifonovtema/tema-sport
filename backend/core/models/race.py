@@ -1,13 +1,15 @@
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
-from . import CourseElement
-from .athlete import Athlete
-from .basetable import BaseTable
+from .base import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, Integer
 from sqlalchemy.orm import relationship
 from typing import List
+
+if TYPE_CHECKING:
+    from .base import Base
+    from .course_element import CourseElement
 
 
 # class Race(BaseTable):
@@ -25,7 +27,7 @@ from typing import List
 #         )
 
 
-class Race(BaseTable):
+class Race(Base):
     # __tablename__ = "races"
     # __table_args__ = (
     #     PrimaryKeyConstraint("id", name="pk_races"),

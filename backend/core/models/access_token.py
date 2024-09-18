@@ -7,11 +7,10 @@ from fastapi_users_db_sqlalchemy.access_token import (
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
-from .basetable import BaseTable
-from .user import User
+from core.models import Base
 from core.config import settings
 from sqlalchemy.orm import relationship
-
+from core.models import User
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,8 +18,10 @@ if TYPE_CHECKING:
 
 class AccessToken(
     SQLAlchemyBaseAccessTokenTable[settings.db.id_type_class.get_id_type()],
-    BaseTable,
+    Base,
 ):
+    __tablename__ = "access_tokens"
+
     user_id: Mapped[settings.db.id_type_class.get_id_type()] = mapped_column(
         settings.db.id_type_class.get_sqlalchemy_type(),
         ForeignKey(User.id, ondelete="cascade"),

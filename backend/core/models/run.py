@@ -1,13 +1,15 @@
 import uuid
 from datetime import datetime
 
-from .basetable import BaseTable
+from .base import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import TIMESTAMP, String, Uuid
 from sqlalchemy.orm import relationship
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 
-from .competitor_run import CompetitorRun
+
+if TYPE_CHECKING:
+    from .competitor_run import CompetitorRun
 
 
 # class Run(BaseTable):
@@ -34,7 +36,7 @@ from .competitor_run import CompetitorRun
 #         )
 
 
-class Run(BaseTable):
+class Run(Base):
 
     name: Mapped[str] = mapped_column(String)
 

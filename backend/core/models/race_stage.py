@@ -1,12 +1,12 @@
 from typing import Optional, List
 
 from core.config import settings
-from core.models import BaseTable
+from core.models.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, Text
 
 
-class RaceStage(BaseTable):
+class RaceStage(Base):
     # __table_args__ = (
     #     ForeignKeyConstraint(
     #         ["parent_race_stage_id"],

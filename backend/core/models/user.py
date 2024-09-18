@@ -2,20 +2,20 @@ from typing import TYPE_CHECKING, List
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 
-from . import AccessToken
-from .basetable import BaseTable
+from core.models import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, relationship
 
-from .competition_owner import CompetitionOwner
-from .user_profile import UserProfile
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+    from core.models import CompetitionOwner
+    from core.models import UserProfile
+    from core.models import AccessToken
 
 
 class User(
-    BaseTable,
+    Base,
     SQLAlchemyBaseUserTable[settings.db.id_type_class.get_id_type()],
 ):
 

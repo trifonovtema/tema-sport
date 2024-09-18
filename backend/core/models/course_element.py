@@ -5,11 +5,11 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from core.models import Race
+from core.models.race import Race
 from core.types.enum_types import CourseElementType
 from typing import Optional
 
-from .basetable import BaseTable
+from .base import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -36,7 +36,7 @@ from .judgement_group import JudgementGroup
 #     )
 
 
-class CourseElement(BaseTable):
+class CourseElement(Base):
     # __table_args__ = (
     #     ForeignKeyConstraint(
     #         ["judgement_group_id"],

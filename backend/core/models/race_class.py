@@ -1,12 +1,12 @@
 from typing import Optional
 
 from core.config import settings
-from core.models import BaseTable
+from core.models.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Integer
 
 
-class RaceClass(BaseTable):
+class RaceClass(Base):
     __tablename__ = "race_classes"
 
     name: Mapped[Optional[int]] = mapped_column(Integer)

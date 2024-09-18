@@ -1,11 +1,11 @@
 from core.types.enum_types import GateType
-from .basetable import BaseTable
+from .base import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Enum as SqlEnum
 
 
-class Gate(BaseTable):
+class Gate(Base):
     course_element_id: Mapped[settings.db.id_type_class.get_id_type()] = mapped_column(
         nullable=False,
     )
