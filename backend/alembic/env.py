@@ -1,4 +1,5 @@
 import asyncio
+from logging import basicConfig
 from logging.config import fileConfig
 
 from sqlalchemy import pool
@@ -9,6 +10,9 @@ from sqlalchemy.schema import CreateSchema
 from alembic import context
 from core.models import Base
 from core.config import settings
+import logging
+
+logger = logging.getLogger("alembic.runtime.migration")
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -63,12 +67,22 @@ def run_migrations_offline() -> None:
 
 
 def do_run_migrations(connection: Connection) -> None:
+
+
+    def include_name(name, type_, parent_names):
+        if type_ == "schema":
+            # note this will not include the default schema
+            return name not in ["tema_sport_model"]
+        else:
+            return True
+
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
         version_table_schema=ALEMBIC_VERSION_SCHEMA,
         compare_type=True,
         include_schemas=True,
+        include_name=include_name,
     )
     # print("------------------------------")
     # print(Base.metadata.tables.keys())
@@ -96,8 +110,10 @@ async def run_async_migrations() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
+    logger.info(f"target_metadata.tables: {target_metadata.tables.keys()}")
 
     asyncio.run(run_async_migrations())
+    logger.info(f"target_metadata.tables: {target_metadata.tables.keys()}")
 
 
 if context.is_offline_mode():
