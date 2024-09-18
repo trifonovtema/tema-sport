@@ -1,9 +1,11 @@
 from typing import Optional, List
 
 from core.config import settings
+from core.models.scoring_rule import ScoringRule
+from core.models.race_class import RaceClass
 from core.models.base import Base
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Integer, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship, declared_attr
+from sqlalchemy import Integer, Text, ForeignKey
 
 
 class RaceStage(Base):
@@ -18,16 +20,27 @@ class RaceStage(Base):
     # )
 
     race_class_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
-        mapped_column(nullable=True)
+        mapped_column(
+            ForeignKey(RaceClass.id),
+            nullable=True,
+        )
     )
     runs_number: Mapped[Optional[int]] = mapped_column(Integer)
     athletes_start_interval: Mapped[Optional[int]] = mapped_column(Integer)
+
     parent_race_stage_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
-        mapped_column(nullable=True)
+        mapped_column(
+            ForeignKey(f"{settings.db.SCHEMA}.race_stages.id"),
+            nullable=True,
+        )
     )
+
     type: Mapped[Optional[str]] = mapped_column(Text)
     scoring_rule_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
-        mapped_column(nullable=True)
+        mapped_column(
+            ForeignKey(ScoringRule.id),
+            nullable=True,
+        )
     )
     athletes_qualified_count: Mapped[Optional[int]] = mapped_column(Integer)
     athletes_qualified_percentage: Mapped[Optional[int]] = mapped_column(Integer)

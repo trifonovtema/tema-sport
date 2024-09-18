@@ -8,8 +8,8 @@ from sqlalchemy.orm import relationship
 from typing import List
 
 if TYPE_CHECKING:
-    from .base import Base
     from .course_element import CourseElement
+    from .athlete import Athlete
 
 
 # class Race(BaseTable):

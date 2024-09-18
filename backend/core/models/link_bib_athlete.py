@@ -5,12 +5,11 @@ from core.models.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
 
 
-class BibCompetitor(Base):
-    __tablename__ = "bibs_competitiors"
-
+class LinkBibAthlete(Base):
+    __tablename__ = "link_bibs_athletes"
+    athlete_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
+        mapped_column(nullable=True)
+    )
     bib_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = mapped_column(
         nullable=True
-    )
-    competitor_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
-        mapped_column(nullable=True)
     )

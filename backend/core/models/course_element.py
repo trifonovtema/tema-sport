@@ -1,7 +1,7 @@
 from sqlalchemy import (
     Integer,
     Enum as SqlEnum,
-    Uuid,
+    ForeignKey,
 )
 from sqlalchemy.orm import relationship
 
@@ -12,6 +12,7 @@ from typing import Optional
 from .base import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, mapped_column
+
 
 from .judgement_group import JudgementGroup
 
@@ -49,9 +50,9 @@ class CourseElement(Base):
     #     PrimaryKeyConstraint("id", name="pk_course_elements"),
     #     {"schema": "tema_sport"},
     # )
-
     race_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = mapped_column(
-        Uuid, nullable=True
+        ForeignKey(Race.id),
+        nullable=True,
     )
     number: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     type: Mapped[Optional[str]] = mapped_column(
@@ -65,7 +66,10 @@ class CourseElement(Base):
         nullable=True,
     )
     judgement_group_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
-        mapped_column(nullable=True)
+        mapped_column(
+            ForeignKey(JudgementGroup.id),
+            nullable=True,
+        )
     )
 
     judgement_group: Mapped["JudgementGroup"] = relationship(

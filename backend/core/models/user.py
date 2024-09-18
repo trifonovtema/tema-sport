@@ -6,12 +6,11 @@ from core.models import Base
 from core.config import settings
 from sqlalchemy.orm import Mapped, relationship
 
-
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
-    from core.models import CompetitionOwner
     from core.models import UserProfile
     from core.models import AccessToken
+    from core.models.link_competition_owner import LinkCompetitionOwner
 
 
 class User(
@@ -23,8 +22,8 @@ class User(
         "AccessToken",
         back_populates="user",
     )
-    competition_owners: Mapped[List["CompetitionOwner"]] = relationship(
-        "CompetitionOwner",
+    competition_owners: Mapped[List["LinkCompetitionOwner"]] = relationship(
+        "LinkCompetitionOwner",
         back_populates="user",
     )
     user_profiles: Mapped[List["UserProfile"]] = relationship(
