@@ -1,26 +1,27 @@
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime
+from typing import Any
 from core.config import settings
 
 
-class BaseRun(BaseModel):
-    name: str | None
+class BaseBib(BaseModel):
+    bib_number: int | None
 
 
-class ReadRun(BaseRun):
+class ReadBib(BaseBib):
     id: settings.db.id_type_class.get_id_type()
     created_at: datetime | None
     updated_at: datetime | None
     model_config = ConfigDict(from_attributes=True)
 
 
-class UpdateRun(BaseRun):
-    name: str | None = None
+class UpdateBib(BaseBib):
+    bib_number: int | None
 
 
-class CreateRun(BaseRun):
+class CreateBib(BaseBib):
     pass
 
 
-class FilterRun(BaseModel):
-    name: str | None = None
+class FilterBib(BaseBib):
+    bib_number: int | None
