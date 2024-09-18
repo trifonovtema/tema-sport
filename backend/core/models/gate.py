@@ -15,7 +15,7 @@ class Gate(Base):
     type: Mapped[GateType] = mapped_column(
         SqlEnum(
             GateType,
-            name="course_element_type",
+            name="gate_type",
             schema=settings.db.SCHEMA,
             # native_enum=False,
             # values_callable=lambda x: [e.value for e in x],
