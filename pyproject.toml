@@ -13,14 +13,14 @@ fastapi = "^0.112.2"
 uvicorn = "^0.30.6"
 aiokafka = "^0.11.0"
 pydantic-settings = "^2.4.0"
-sqlalchemy = "^2.0.32"
 python-dotenv = "^1.0.1"
 redis = "^5.0.8"
 asyncpg = "^0.29.0"
-fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+fastapi-users = {version = "^13.0.0"}
 alembic = "^1.13.2"
 fastapi-users-db-sqlalchemy = "^6.0.1"
 orjson = "^3.10.7"
+sqlalchemy = "^2.0.34"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
