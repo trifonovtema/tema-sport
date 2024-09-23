@@ -24,3 +24,7 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     op.execute(f"drop schema if exists {settings.db.SCHEMA}")
+
+
+# op.execute(f"DROP TYPE IF EXISTS gate_type CASCADE")
+#    op.execute(f"DROP TYPE IF EXISTS course_element_type CASCADE")

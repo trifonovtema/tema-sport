@@ -45,6 +45,7 @@ origins = [
     "http://localhost",
     "http://localhost:8000",
     "http://localhost:3000",
+    "http://localhost:5173",
 ]
 
 main_app.add_middleware(
@@ -54,6 +55,7 @@ main_app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 main_app.include_router(
     router_api,
