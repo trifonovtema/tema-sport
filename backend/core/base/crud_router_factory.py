@@ -1,3 +1,4 @@
+from devtools import debug
 from typing import Type, Annotated, Callable
 from fastapi import APIRouter, Depends
 from core.base.base_service import BaseService
@@ -21,6 +22,7 @@ def create_crud_router_factory(
         obj_in: create_schema,
         service: Annotated[service_class, Depends(service_dependency)],
     ):
+        debug(obj_in)
         return await service.create(obj_in)
 
     @router.get("/{obj_id}")

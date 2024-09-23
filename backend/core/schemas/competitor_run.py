@@ -5,12 +5,9 @@ from core.config import settings
 
 
 class BaseCompetitorRun(BaseModel):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     scheduled_time: datetime | None
-    run_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadCompetitorRun(BaseCompetitorRun):
@@ -21,12 +18,9 @@ class ReadCompetitorRun(BaseCompetitorRun):
 
 
 class UpdateCompetitorRun(BaseCompetitorRun):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     scheduled_time: datetime | None
-    run_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateCompetitorRun(BaseCompetitorRun):
@@ -34,9 +28,6 @@ class CreateCompetitorRun(BaseCompetitorRun):
 
 
 class FilterCompetitorRun(BaseCompetitorRun):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     scheduled_time: datetime | None
-    run_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None

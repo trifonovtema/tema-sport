@@ -5,11 +5,8 @@ from core.config import settings
 
 
 class BaseCompetitorMedalGroup(BaseModel):
-    competitor_id: Any | None
-    medal_group_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
+    medal_group_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadCompetitorMedalGroup(BaseCompetitorMedalGroup):
@@ -20,11 +17,8 @@ class ReadCompetitorMedalGroup(BaseCompetitorMedalGroup):
 
 
 class UpdateCompetitorMedalGroup(BaseCompetitorMedalGroup):
-    competitor_id: Any | None
-    medal_group_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
+    medal_group_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateCompetitorMedalGroup(BaseCompetitorMedalGroup):
@@ -32,8 +26,5 @@ class CreateCompetitorMedalGroup(BaseCompetitorMedalGroup):
 
 
 class FilterCompetitorMedalGroup(BaseCompetitorMedalGroup):
-    competitor_id: Any | None
-    medal_group_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
+    medal_group_id: settings.db.id_type_class.get_id_type() | None

@@ -5,14 +5,11 @@ from core.config import settings
 
 
 class BaseCompetitionResult(BaseModel):
-    competition_id: Any | None
-    competitor_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: int | None
     total_penalty: int | None
     total_time: int | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class ReadCompetitionResult(BaseCompetitionResult):
@@ -23,14 +20,11 @@ class ReadCompetitionResult(BaseCompetitionResult):
 
 
 class UpdateCompetitionResult(BaseCompetitionResult):
-    competition_id: Any | None
-    competitor_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: int | None
     total_penalty: int | None
     total_time: int | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class CreateCompetitionResult(BaseCompetitionResult):
@@ -38,11 +32,8 @@ class CreateCompetitionResult(BaseCompetitionResult):
 
 
 class FilterCompetitionResult(BaseCompetitionResult):
-    competition_id: Any | None
-    competitor_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: int | None
     total_penalty: int | None
     total_time: int | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None

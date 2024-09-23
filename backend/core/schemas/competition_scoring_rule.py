@@ -5,11 +5,8 @@ from core.config import settings
 
 
 class BaseCompetitionScoringRule(BaseModel):
-    competition_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
     calculated_by_rule: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class ReadCompetitionScoringRule(BaseCompetitionScoringRule):
@@ -20,11 +17,8 @@ class ReadCompetitionScoringRule(BaseCompetitionScoringRule):
 
 
 class UpdateCompetitionScoringRule(BaseCompetitionScoringRule):
-    competition_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
     calculated_by_rule: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class CreateCompetitionScoringRule(BaseCompetitionScoringRule):
@@ -32,8 +26,5 @@ class CreateCompetitionScoringRule(BaseCompetitionScoringRule):
 
 
 class FilterCompetitionScoringRule(BaseCompetitionScoringRule):
-    competition_id: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
     calculated_by_rule: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None

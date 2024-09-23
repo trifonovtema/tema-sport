@@ -5,8 +5,8 @@ from core.config import settings
 
 
 class BaseAggRunResult(BaseModel):
-    run_id: Any | None
-    athlete_id: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: int | None
     total_time: Any | None
@@ -20,8 +20,8 @@ class ReadAggRunResult(BaseAggRunResult):
 
 
 class UpdateAggRunResult(BaseAggRunResult):
-    run_id: Any | None
-    athlete_id: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: int | None
     total_time: Any | None
@@ -32,8 +32,8 @@ class CreateAggRunResult(BaseAggRunResult):
 
 
 class FilterAggRunResult(BaseAggRunResult):
-    run_id: Any | None
-    athlete_id: Any | None
+    run_id: settings.db.id_type_class.get_id_type() | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: int | None
     total_time: Any | None

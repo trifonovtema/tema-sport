@@ -5,13 +5,10 @@ from core.config import settings
 
 
 class BaseGateRun(BaseModel):
-    gate_id: Any | None
-    competitor_run_id: Any | None
+    gate_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     penalty: int | None
-    athlete_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadGateRun(BaseGateRun):
@@ -22,13 +19,10 @@ class ReadGateRun(BaseGateRun):
 
 
 class UpdateGateRun(BaseGateRun):
-    gate_id: Any | None
-    competitor_run_id: Any | None
+    gate_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     penalty: int | None
-    athlete_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateGateRun(BaseGateRun):
@@ -36,10 +30,7 @@ class CreateGateRun(BaseGateRun):
 
 
 class FilterGateRun(BaseGateRun):
-    gate_id: Any | None
-    competitor_run_id: Any | None
+    gate_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     penalty: int | None
-    athlete_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None

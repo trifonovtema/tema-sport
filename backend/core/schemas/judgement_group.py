@@ -5,10 +5,7 @@ from core.config import settings
 
 
 class BaseJudgementGroup(BaseModel):
-    competition_registered_user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadJudgementGroup(BaseJudgementGroup):
@@ -19,10 +16,9 @@ class ReadJudgementGroup(BaseJudgementGroup):
 
 
 class UpdateJudgementGroup(BaseJudgementGroup):
-    competition_registered_user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None = (
+        None
+    )
 
 
 class CreateJudgementGroup(BaseJudgementGroup):
@@ -30,7 +26,6 @@ class CreateJudgementGroup(BaseJudgementGroup):
 
 
 class FilterJudgementGroup(BaseJudgementGroup):
-    competition_registered_user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None = (
+        None
+    )

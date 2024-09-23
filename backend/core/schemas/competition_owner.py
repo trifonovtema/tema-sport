@@ -5,11 +5,8 @@ from core.config import settings
 
 
 class BaseCompetitionOwner(BaseModel):
-    competition_id: Any | None
-    user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    user_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadCompetitionOwner(BaseCompetitionOwner):
@@ -20,11 +17,8 @@ class ReadCompetitionOwner(BaseCompetitionOwner):
 
 
 class UpdateCompetitionOwner(BaseCompetitionOwner):
-    competition_id: Any | None
-    user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    user_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateCompetitionOwner(BaseCompetitionOwner):
@@ -32,8 +26,5 @@ class CreateCompetitionOwner(BaseCompetitionOwner):
 
 
 class FilterCompetitionOwner(BaseCompetitionOwner):
-    competition_id: Any | None
-    user_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    competition_id: settings.db.id_type_class.get_id_type() | None
+    user_id: settings.db.id_type_class.get_id_type() | None

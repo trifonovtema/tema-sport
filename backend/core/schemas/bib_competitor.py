@@ -5,11 +5,8 @@ from core.config import settings
 
 
 class BaseBibCompetitor(BaseModel):
-    bib_id: Any | None
-    competitor_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    bib_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadBibCompetitor(BaseBibCompetitor):
@@ -20,11 +17,8 @@ class ReadBibCompetitor(BaseBibCompetitor):
 
 
 class UpdateBibCompetitor(BaseBibCompetitor):
-    bib_id: Any | None
-    competitor_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    bib_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateBibCompetitor(BaseBibCompetitor):
@@ -32,8 +26,5 @@ class CreateBibCompetitor(BaseBibCompetitor):
 
 
 class FilterBibCompetitor(BaseBibCompetitor):
-    bib_id: Any | None
-    competitor_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    bib_id: settings.db.id_type_class.get_id_type() | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None

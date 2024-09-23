@@ -5,12 +5,9 @@ from core.config import settings
 
 
 class BaseFinishRun(BaseModel):
-    finish_id: Any | None
-    competitor_run_id: Any | None
+    finish_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     finish_time: datetime | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class ReadFinishRun(BaseFinishRun):
@@ -21,12 +18,9 @@ class ReadFinishRun(BaseFinishRun):
 
 
 class UpdateFinishRun(BaseFinishRun):
-    finish_id: Any | None
-    competitor_run_id: Any | None
+    finish_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     finish_time: datetime | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
 
 
 class CreateFinishRun(BaseFinishRun):
@@ -34,9 +28,6 @@ class CreateFinishRun(BaseFinishRun):
 
 
 class FilterFinishRun(BaseFinishRun):
-    finish_id: Any | None
-    competitor_run_id: Any | None
+    finish_id: settings.db.id_type_class.get_id_type() | None
+    competitor_run_id: settings.db.id_type_class.get_id_type() | None
     finish_time: datetime | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None

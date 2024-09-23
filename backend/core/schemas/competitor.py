@@ -5,10 +5,7 @@ from core.config import settings
 
 
 class BaseCompetitor(BaseModel):
-    race_class_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadCompetitor(BaseCompetitor):
@@ -19,10 +16,7 @@ class ReadCompetitor(BaseCompetitor):
 
 
 class UpdateCompetitor(BaseCompetitor):
-    race_class_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateCompetitor(BaseCompetitor):
@@ -30,7 +24,4 @@ class CreateCompetitor(BaseCompetitor):
 
 
 class FilterCompetitor(BaseCompetitor):
-    race_class_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None

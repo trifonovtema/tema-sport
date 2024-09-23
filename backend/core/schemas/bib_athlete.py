@@ -5,8 +5,8 @@ from core.config import settings
 
 
 class BaseBibAthlete(BaseModel):
-    athlete_id: Any | None
-    bib_id: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
+    bib_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadBibAthlete(BaseBibAthlete):
@@ -17,8 +17,8 @@ class ReadBibAthlete(BaseBibAthlete):
 
 
 class UpdateBibAthlete(BaseBibAthlete):
-    athlete_id: Any | None
-    bib_id: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
+    bib_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateBibAthlete(BaseBibAthlete):
@@ -26,5 +26,5 @@ class CreateBibAthlete(BaseBibAthlete):
 
 
 class FilterBibAthlete(BaseBibAthlete):
-    athlete_id: Any | None
-    bib_id: Any | None
+    athlete_id: settings.db.id_type_class.get_id_type() | None
+    bib_id: settings.db.id_type_class.get_id_type() | None

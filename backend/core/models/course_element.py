@@ -55,16 +55,20 @@ class CourseElement(Base):
         nullable=True,
     )
     number: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    type: Mapped[Optional[str]] = mapped_column(
-        SqlEnum(
-            CourseElementType,
-            name="course_element_type",
-            schema=settings.db.SCHEMA,
-            # native_enum=False,
-            # values_callable=lambda x: [e.value for e in x],
-        ),
+    # type: Mapped[Optional[str]] = mapped_column(
+    #     SqlEnum(
+    #         CourseElementType,
+    #         name="course_element_type",
+    #         schema=settings.db.SCHEMA,
+    #         # native_enum=False,
+    #         # values_callable=lambda x: [e.value for e in x],
+    #     ),
+    #     nullable=True,
+    # )
+    type: Mapped[str] = mapped_column(
         nullable=True,
     )
+
     judgement_group_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
         mapped_column(
             ForeignKey(JudgementGroup.id),

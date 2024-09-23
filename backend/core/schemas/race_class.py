@@ -8,10 +8,7 @@ class BaseRaceClass(BaseModel):
     name: int | None
     athletes_qualified_count: int | None
     athletes_qualified_percentage: int | None
-    race_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadRaceClass(BaseRaceClass):
@@ -25,10 +22,7 @@ class UpdateRaceClass(BaseRaceClass):
     name: int | None
     athletes_qualified_count: int | None
     athletes_qualified_percentage: int | None
-    race_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateRaceClass(BaseRaceClass):
@@ -39,7 +33,4 @@ class FilterRaceClass(BaseRaceClass):
     name: int | None
     athletes_qualified_count: int | None
     athletes_qualified_percentage: int | None
-    race_id: Any | None
-    id: Any | None
-    created_at: Any | None
-    updated_at: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None

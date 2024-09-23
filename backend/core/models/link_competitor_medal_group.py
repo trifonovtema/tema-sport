@@ -1,7 +1,7 @@
 from typing import Optional
 
 from core.config import settings
-from core.models import MedalGroup
+from core.models.medal_group import MedalGroup
 from core.models.competitor import Competitor
 from core.models.base import Base
 from sqlalchemy.orm import Mapped, mapped_column

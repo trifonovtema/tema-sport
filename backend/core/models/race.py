@@ -37,20 +37,20 @@ class Race(Base):
 
     name: Mapped[str] = mapped_column(
         String,
-        nullable=False,
+        nullable=True,
     )
     competition_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
         mapped_column(
-            nullable=False,
+            nullable=True,
         )
     )
     athletes_start_interval: Mapped[Optional[int]] = mapped_column(
         Integer,
-        nullable=False,
+        nullable=True,
     )
     scoring_rule_id: Mapped[Optional[settings.db.id_type_class.get_id_type()]] = (
         mapped_column(
-            nullable=False,
+            nullable=True,
         )
     )
 

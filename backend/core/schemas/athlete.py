@@ -5,8 +5,8 @@ from core.config import settings
 
 
 class BaseAthlete(BaseModel):
-    competition_registered_user_id: Any | None
-    race_id: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None
+    race_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadAthlete(BaseAthlete):
@@ -17,8 +17,8 @@ class ReadAthlete(BaseAthlete):
 
 
 class UpdateAthlete(BaseAthlete):
-    competition_registered_user_id: Any | None
-    race_id: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None
+    race_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateAthlete(BaseAthlete):
@@ -26,5 +26,5 @@ class CreateAthlete(BaseAthlete):
 
 
 class FilterAthlete(BaseAthlete):
-    competition_registered_user_id: Any | None
-    race_id: Any | None
+    competition_registered_user_id: settings.db.id_type_class.get_id_type() | None
+    race_id: settings.db.id_type_class.get_id_type() | None

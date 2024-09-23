@@ -5,12 +5,12 @@ from core.config import settings
 
 
 class BaseAggRaceResult(BaseModel):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: Any | None
     total_time: Any | None
-    race_id: Any | None
-    race_class_id: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None
 
 
 class ReadAggRaceResult(BaseAggRaceResult):
@@ -21,12 +21,12 @@ class ReadAggRaceResult(BaseAggRaceResult):
 
 
 class UpdateAggRaceResult(BaseAggRaceResult):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: Any | None
     total_time: Any | None
-    race_id: Any | None
-    race_class_id: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None
 
 
 class CreateAggRaceResult(BaseAggRaceResult):
@@ -34,9 +34,9 @@ class CreateAggRaceResult(BaseAggRaceResult):
 
 
 class FilterAggRaceResult(BaseAggRaceResult):
-    competitor_id: Any | None
+    competitor_id: settings.db.id_type_class.get_id_type() | None
     run_time: Any | None
     total_penalty: Any | None
     total_time: Any | None
-    race_id: Any | None
-    race_class_id: Any | None
+    race_id: settings.db.id_type_class.get_id_type() | None
+    race_class_id: settings.db.id_type_class.get_id_type() | None

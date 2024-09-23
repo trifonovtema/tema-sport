@@ -12,13 +12,17 @@ class Gate(Base):
     number: Mapped[int] = mapped_column(
         nullable=True,
     )
-    type: Mapped[GateType] = mapped_column(
-        SqlEnum(
-            GateType,
-            name="gate_type",
-            schema=settings.db.SCHEMA,
-            # native_enum=False,
-            # values_callable=lambda x: [e.value for e in x],
-        ),
+    # type: Mapped[GateType] = mapped_column(
+    #     SqlEnum(
+    #         GateType,
+    #         name="gate_type",
+    #         schema=settings.db.SCHEMA,
+    #         # native_enum=False,
+    #         # values_callable=lambda x: [e.value for e in x],
+    #     ),
+    #     nullable=True,
+    # )
+
+    type: Mapped[str] = mapped_column(
         nullable=True,
     )
