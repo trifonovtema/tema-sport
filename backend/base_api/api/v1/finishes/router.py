@@ -11,6 +11,6 @@ router = create_crud_router_factory(
     filter_schema=FilterFinish,
     service_dependency=get_finish_service,
     id_type=settings.db.id_type_class.get_id_type(),
-    prefix=settings.api.v1.races,
+    prefix=settings.api.v1.finishes,
     tags=["Finishes"],
 )
